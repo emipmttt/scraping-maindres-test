@@ -3,7 +3,6 @@ const shop_tiendanube = require("./shops/tiendanube");
 const shop_tuck = require("./shops/tuck.js");
 const shop_desiderata = require("./shops/desiderata");
 const shop_keybiscayne = require("./shops/keybiscayne");
-const shop_madnessclothing = require("./shops/madnessclothing");
 const shop_garzongarcia = require("./shops/garzongarcia");
 const shop_tresasesbasicos = require("./shops/tresasesbasicos");
 const shop_namer = require("./shops/namer.js");
@@ -30,18 +29,15 @@ const shop_domaleather = require("./shops/domaleather");
     });
 
     const page = await browser.newPage();
+    page.setDefaultNavigationTimeout(0);
 
     const dateScraping = 1615399414960;
 
-    await shop_sweetvictorian(page,dateScraping);
     await shop_47street(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_sweet(page, dateScraping);
-    await shop_madnessclothing(page, dateScraping);
     await shop_tuck(page, dateScraping);
     await shop_garzongarcia(page, dateScraping);
-
-    await shop_pielonline(page, dateScraping);
     await shop_tresasesbasicos(page, dateScraping);
 
     await shop_muaa(page, dateScraping);
@@ -271,6 +267,11 @@ const shop_domaleather = require("./shops/domaleather");
         tags: ["accesorios"],
       }
     );
+
+    // past
+    await shop_sweetvictorian(page, dateScraping);
+    await shop_madnessclothing(page, dateScraping);
+    await shop_pielonline(page, dateScraping);
   } catch (error) {
     console.log(error);
   }
