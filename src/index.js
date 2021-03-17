@@ -33,7 +33,7 @@ const shop_domaleather = require("./shops/domaleather");
 
     const dateScraping = 1615399414960;
 
-    await shop_sweetvictorian(dateScraping);
+    await shop_sweetvictorian(page,dateScraping);
     await shop_47street(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_sweet(page, dateScraping);
