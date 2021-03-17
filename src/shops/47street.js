@@ -28,7 +28,6 @@ module.exports = async (page, dateScraping) => {
 
       await page.goto(category);
       const clickOnShowMore = async (scroll) => {
-        console.log("Intentando mostrar más productos");
         await page.waitForTimeout(1000);
 
         try {
@@ -76,23 +75,19 @@ module.exports = async (page, dateScraping) => {
       for (productUrl of products) {
         try {
           await page.goto(productUrl);
-          console.log("Se abrió url correctamente");
         } catch (error) {
           console.log("Error al abrir el producto");
         }
 
         var isTrueProduct = false;
 
-        console.log("Intentando abrir #imagen1");
-
         try {
           await page.waitForSelector("#imagen1", {
             timeout: 3000,
           });
           isTrueProduct = true;
-          console.log("Imagen1 encontrada");
         } catch {
-          console.log("Imagen1 no encontrada");
+          console.log("Imagen no encontrada", productUrl);
           isTrueProduct = false;
         }
         if (isTrueProduct) {
