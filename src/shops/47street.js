@@ -76,7 +76,7 @@ module.exports = async (page, dateScraping) => {
         try {
           await page.goto(productUrl);
         } catch (error) {
-          console.log("Error al abrir el producto");
+          console.log("Error al abrir el producto " + productUrl);
         }
 
         var isTrueProduct = false;
@@ -87,7 +87,7 @@ module.exports = async (page, dateScraping) => {
           });
           isTrueProduct = true;
         } catch {
-          console.log("Imagen no encontrada", productUrl);
+          console.log("Imagen no encontrada " + productUrl);
           isTrueProduct = false;
         }
         if (isTrueProduct) {
