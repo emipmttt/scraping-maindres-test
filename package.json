@@ -15,7 +15,6 @@
     "start": "pm2 start src/index.js -l log.txt",
     "serve": "node src/index.js",
     "nube": "node src/nube.js"
-    
   },
   "keywords": [],
   "author": "",
