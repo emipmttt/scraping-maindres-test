@@ -33,10 +33,8 @@ const shop_domaleather = require("./shops/domaleather");
 
     const dateScraping = 1615399414960;
 
-    await shop_tuck(page, dateScraping);
     await shop_garzongarcia(page, dateScraping);
     await shop_tresasesbasicos(page, dateScraping);
-
     await shop_muaa(page, dateScraping);
     await shop_oklan(page, dateScraping);
     await shop_equus(page, dateScraping);
@@ -50,6 +48,7 @@ const shop_domaleather = require("./shops/domaleather");
 
     // past
     await shop_sweetvictorian(page, dateScraping);
+    await shop_tuck(page, dateScraping);
     await shop_madnessclothing(page, dateScraping);
     await shop_pielonline(page, dateScraping);
     await shop_47street(page, dateScraping);
