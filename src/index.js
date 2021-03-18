@@ -26,9 +26,11 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
+      // headless: false,
     });
 
     const page = await browser.newPage();
+    
     page.setDefaultNavigationTimeout(0);
 
     const dateScraping = 1615399414960;

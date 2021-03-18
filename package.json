@@ -12,8 +12,9 @@
     "puppeteer-core": "^8.0.0"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "pm2 start src/index.js -l log.txt",
     "nube": "node src/nube.js"
+    
   },
   "keywords": [],
   "author": "",

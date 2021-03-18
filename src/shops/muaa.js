@@ -1,4 +1,3 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 const autoScroll = require("../utils/autoScroll");
@@ -74,7 +73,7 @@ module.exports = async (page, dateScraping) => {
             try {
               await page.goto(productUrl);
             } catch (error) {
-              console.log("Error al abrir el producto");
+              console.log("Error al abrir el producto", productUrl);
             }
 
             var isTrueProduct = false;
@@ -85,7 +84,7 @@ module.exports = async (page, dateScraping) => {
               });
               isTrueProduct = true;
             } catch {
-              console.log("Imagen1 no encontrada");
+              console.log("Imagen no encontrada", productUrl);
               isTrueProduct = false;
             }
             if (isTrueProduct) {
