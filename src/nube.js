@@ -33,16 +33,7 @@ const shop_domaleather = require("./shops/domaleather");
 
     const dateScraping = 1615399414960;
 
-    await shop_tiendanube(
-      page,
-
-      "https://www.anastasiamonaco.com.ar/",
-      "anastasiamonaco",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
+ 
 
     await shop_tiendanube(
       page,
@@ -248,6 +239,16 @@ const shop_domaleather = require("./shops/domaleather");
       dateScraping,
       {
         tags: ["zapatilla"],
+      }
+    );
+    await shop_tiendanube(
+      page,
+
+      "https://www.anastasiamonaco.com.ar/",
+      "anastasiamonaco",
+      dateScraping,
+      {
+        tags: ["mujer"],
       }
     );
   } catch (error) {
