@@ -18,8 +18,8 @@ module.exports = async (page, dateScraping) => {
     // });
 
     const routes = [
-      "https://www.47street.com.ar/coleccion/ver-todo-aw2021.html",
-      "https://www.47street.com.ar/back-to-school-2021.html",
+      // "https://www.47street.com.ar/coleccion/ver-todo-aw2021.html",
+      // "https://www.47street.com.ar/back-to-school-2021.html",
       "https://www.47street.com.ar/final-sale.html",
     ];
 
@@ -83,7 +83,7 @@ module.exports = async (page, dateScraping) => {
 
         try {
           await page.waitForSelector("#imagen1", {
-            timeout: 3000,
+            timeout: 5000,
           });
           isTrueProduct = true;
         } catch {

@@ -35,75 +35,6 @@ const shop_domaleather = require("./shops/domaleather");
 
     await shop_tiendanube(
       page,
-      "https://www.pretzeloficial.com/",
-      "pretzeloficial",
-      dateScraping,
-      {
-        tags: ["No gender"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-
-      "https://hosefa.com/",
-      "hosefa",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-
-      "https://www.gypsyba.com.ar/",
-      "gypsyba",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-    await shop_tiendanube(
-      page,
-
-      "https://bullbags.mitiendanube.com/",
-      "bullbags",
-      dateScraping,
-      { tags: ["accesorios"] }
-    );
-    await shop_tiendanube(
-      page,
-
-      "https://mulukstore.mitiendanube.com/",
-      "mulukstore",
-      dateScraping,
-      { tags: ["accesorios"] }
-    );
-
-    await shop_tiendanube(
-      page,
-
-      "https://www.rangers.com.ar/",
-      "rangers",
-      dateScraping,
-      {
-        tags: ["zapatilla"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-
-      "https://www.whydonna.com.ar/",
-      "whydonna",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-    await shop_tiendanube(
-      page,
 
       "https://www.anastasiamonaco.com.ar/",
       "anastasiamonaco",
@@ -247,6 +178,76 @@ const shop_domaleather = require("./shops/domaleather");
       dateScraping,
       {
         tags: ["accesorios"],
+      }
+    );
+
+    // past
+
+    await shop_tiendanube(
+      page,
+
+      "https://www.whydonna.com.ar/",
+      "whydonna",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.pretzeloficial.com/",
+      "pretzeloficial",
+      dateScraping,
+      {
+        tags: ["No gender"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+
+      "https://hosefa.com/",
+      "hosefa",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.gypsyba.com.ar/",
+      "gypsyba",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+    await shop_tiendanube(
+      page,
+      "https://bullbags.mitiendanube.com/",
+      "bullbags",
+      dateScraping,
+      { tags: ["accesorios"] }
+    );
+    await shop_tiendanube(
+      page,
+
+      "https://mulukstore.mitiendanube.com/",
+      "mulukstore",
+      dateScraping,
+      { tags: ["accesorios"] }
+    );
+
+    await shop_tiendanube(
+      page,
+
+      "https://www.rangers.com.ar/",
+      "rangers",
+      dateScraping,
+      {
+        tags: ["zapatilla"],
       }
     );
   } catch (error) {
