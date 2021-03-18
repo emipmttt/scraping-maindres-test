@@ -26,6 +26,7 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
+      headless: false,
     });
 
     const page = await browser.newPage();
@@ -33,70 +34,6 @@ const shop_domaleather = require("./shops/domaleather");
 
     const dateScraping = 1615399414960;
 
- 
-
-    await shop_tiendanube(
-      page,
-      "https://shop.innocenza.com.ar/",
-      "innocenza",
-      dateScraping
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.mikson.com.ar/",
-      "mikson",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-    await shop_tiendanube(
-      page,
-      "https://jotabags.com/",
-      "jotabags",
-      dateScraping,
-      [{ tags: ["accesorios"] }]
-    );
-    await shop_tiendanube(
-      page,
-      "https://myrollingbag.mitiendanube.com/",
-      "myrollingbag",
-      dateScraping,
-      { tags: ["accesorios"] }
-    );
-    await shop_tiendanube(
-      page,
-      "https://notnaked.com.ar/",
-      "notnaked",
-      dateScraping
-    );
-    await shop_tiendanube(
-      page,
-      "https://www.disturbia.com.ar/",
-      "disturbia",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.bacchiba.com/",
-      "bacchiba",
-      dateScraping.toExponential,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.mankioficial.com/",
-      "mankioficial",
-      dateScraping
-    );
     await shop_tiendanube(
       page,
       "https://www.pumbo.com.ar/",
@@ -187,6 +124,13 @@ const shop_domaleather = require("./shops/domaleather");
 
     await shop_tiendanube(
       page,
+      "https://www.mankioficial.com/",
+      "mankioficial",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
       "https://www.pretzeloficial.com/",
       "pretzeloficial",
       dateScraping,
@@ -247,6 +191,61 @@ const shop_domaleather = require("./shops/domaleather");
       "https://www.anastasiamonaco.com.ar/",
       "anastasiamonaco",
       dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+    await shop_tiendanube(
+      page,
+      "https://shop.innocenza.com.ar/",
+      "innocenza",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.mikson.com.ar/",
+      "mikson",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+    await shop_tiendanube(
+      page,
+      "https://jotabags.com/",
+      "jotabags",
+      dateScraping,
+      [{ tags: ["accesorios"] }]
+    );
+    await shop_tiendanube(
+      page,
+      "https://myrollingbag.mitiendanube.com/",
+      "myrollingbag",
+      dateScraping,
+      { tags: ["accesorios"] }
+    );
+    await shop_tiendanube(
+      page,
+      "https://notnaked.com.ar/",
+      "notnaked",
+      dateScraping
+    );
+    await shop_tiendanube(
+      page,
+      "https://www.disturbia.com.ar/",
+      "disturbia",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.bacchiba.com/",
+      "bacchiba",
+      dateScraping.toExponential,
       {
         tags: ["mujer"],
       }
