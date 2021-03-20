@@ -26,7 +26,7 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      headless: false, // este va descomentado para ver el navegador
+      // headless: false, // este va descomentado para ver el navegador
     });
 
     const page = await browser.newPage();
@@ -39,8 +39,6 @@ const shop_domaleather = require("./shops/domaleather");
 
     //
 
-    await shop_garzongarcia(page, dateScraping);
-    await shop_tresasesbasicos(page, dateScraping);
     await shop_muaa(page, dateScraping);
     await shop_oklan(page, dateScraping);
     await shop_equus(page, dateScraping);
@@ -49,7 +47,6 @@ const shop_domaleather = require("./shops/domaleather");
     await shop_keybiscayne(page, dateScraping);
     await shop_desiderata(page, dateScraping);
     await shop_domaleather(page, dateScraping);
-    await shop_garzongarcia(page, dateScraping);
     await shop_harveywillys(page, dateScraping);
 
     // past
@@ -60,6 +57,9 @@ const shop_domaleather = require("./shops/domaleather");
     await shop_47street(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_sweet(page, dateScraping);
+    await shop_garzongarcia(page, dateScraping);
+    await shop_tresasesbasicos(page, dateScraping);
+
   } catch (error) {
     console.log(error);
   }
