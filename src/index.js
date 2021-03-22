@@ -18,6 +18,7 @@ const shop_sweetvictorian = require('./shops/sweetvictorian');
 const shop_lazarocuero = require('./shops/lazarocuero');
 const shop_domaleather = require('./shops/domaleather');
 const shop_aeropostale = require('./shops/aeropostale');
+const shop_airborn = require('./shops/airborn');
 
 (async (event, context, callback) => {
   let result = 'result';
@@ -37,6 +38,7 @@ const shop_aeropostale = require('./shops/aeropostale');
     const dateScraping = 1615399414960;
 
     // scrapings nuevos
+    await shop_airborn(page, dateScraping);
     await shop_aeropostale(page, dateScraping);
 
     //
