@@ -25,11 +25,11 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      defaultViewport: {
-        width: 1300,
-        height: 800,
-      },
-      args: [`--window-size=${1300},${800}`],
+      // defaultViewport: {
+      //   width: 1300,
+      //   height: 800,
+      // },
+      // args: [`--window-size=${1300},${800}`],
       // headless: false, // este va descomentado para ver el navegador
     });
 
