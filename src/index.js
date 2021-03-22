@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-const shop_tiendanube = require("./shops/tiendanube");
 const shop_tuck = require("./shops/tuck.js");
 const shop_desiderata = require("./shops/desiderata");
 const shop_keybiscayne = require("./shops/keybiscayne");
@@ -26,7 +25,12 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      // headless: false, // este va descomentado para ver el navegador
+      defaultViewport: {
+        width: 1300,
+        height: 800,
+      },
+      args: [`--window-size=${1300},${800}`],
+      headless: false, // este va descomentado para ver el navegador
     });
 
     const page = await browser.newPage();
@@ -35,31 +39,31 @@ const shop_domaleather = require("./shops/domaleather");
 
     const dateScraping = 1615399414960;
 
-    // scrapings nuevos
+    // fixing
 
     //
-
-    await shop_muaa(page, dateScraping);
-    await shop_oklan(page, dateScraping);
-    await shop_equus(page, dateScraping);
+    await shop_tuck(page, dateScraping);
+    await shop_lazarocuero(page, dateScraping);
+    await shop_keybiscayne(page, dateScraping);
     await shop_baronhirsch(page, dateScraping);
     await shop_namer(page, dateScraping);
-    await shop_keybiscayne(page, dateScraping);
     await shop_desiderata(page, dateScraping);
     await shop_domaleather(page, dateScraping);
     await shop_harveywillys(page, dateScraping);
 
     // past
-    await shop_sweetvictorian(page, dateScraping);
-    await shop_tuck(page, dateScraping);
     await shop_madnessclothing(page, dateScraping);
     await shop_pielonline(page, dateScraping);
     await shop_47street(page, dateScraping);
-    await shop_lazarocuero(page, dateScraping);
     await shop_sweet(page, dateScraping);
     await shop_garzongarcia(page, dateScraping);
     await shop_tresasesbasicos(page, dateScraping);
+    await shop_oklan(page, dateScraping);
+    await shop_equus(page, dateScraping);
 
+    // to fix
+    await shop_muaa(page, dateScraping);
+    await shop_sweetvictorian(page, dateScraping);
   } catch (error) {
     console.log(error);
   }

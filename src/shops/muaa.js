@@ -36,11 +36,11 @@ module.exports = async (page, dateScraping) => {
             await page.waitForTimeout(1000);
 
             try {
-              await page.waitForSelector(".ias_trigger a", {
+              await page.waitForSelector("#galeria > div > a", {
                 timeout: 3000,
               });
 
-              await page.click(".ias_trigger a");
+              await page.click("#galeria > div > a");
 
               await clickOnShowMore();
             } catch (error) {

@@ -1,4 +1,3 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 const autoScroll = require("../utils/autoScroll");
@@ -8,20 +7,21 @@ module.exports = async (page, dateScraping) => {
     {
       try {
         console.log("______tuck______");
-        await page.goto("https://tuck.com.ar/");
       } catch (error) {}
 
-      const routes = await page.evaluate(async () => {
-        // routes es el array que guarda los enlaces
-        // de las categorías
-        let nav = Array.from(document.querySelectorAll(".menu-item-link"));
-        nav = nav.map((category) => {
-          return category.href;
-        });
-        return nav;
-      });
+      // const routes = await page.evaluate(async () => {
+      //   // routes es el array que guarda los enlaces
+      //   // de las categorías
+      //   let nav = Array.from(document.querySelectorAll(".menu-item-link"));
+      //   nav = nav.map((category) => {
+      //     return category.href;
+      //   });
+      //   return nav;
+      // });
 
-      console.log(routes);
+      // console.log(routes);
+
+      const routes = ["https://tuck.com.ar/categoria/all/"];
 
       for (category of routes) {
         if (category != null) {
@@ -50,10 +50,17 @@ module.exports = async (page, dateScraping) => {
               });
 
               products = [...products, ...localProducts];
-              await page.click(".woocommerce-pagination .next");
+              await page.waitForSelector(".next.page-numbers");
+              const nextPage = await page.evaluate(() => {
+                document.querySelector(
+                  '[data-testid="dialog_iframe"]'
+                ).style.display = "none";
+                return document.querySelector(".next.page-numbers").href;
+              });
+              await page.goto(nextPage);
               await getProducts();
             } catch (error) {
-              console.log("No se pudo mostra más productos");
+              console.log(products.length + " Productos encontrados");
               console.log(error);
             }
           };

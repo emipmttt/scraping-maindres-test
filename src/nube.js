@@ -26,7 +26,7 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      // headlles: false
+      headless: false,
     });
 
     const page = await browser.newPage();
@@ -34,25 +34,6 @@ const shop_domaleather = require("./shops/domaleather");
 
     const dateScraping = 1615399414960;
 
-    await shop_tiendanube(
-      page,
-      "https://www.pumbo.com.ar/",
-      "pumbo",
-      dateScraping
-    );
-    await shop_tiendanube(
-      page,
-      "https://shop.veroforest.com/",
-      "veroforest",
-      dateScraping
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.florabikinis.com/",
-      "florabikinis",
-      dateScraping
-    );
     await shop_tiendanube(
       page,
       "https://www.almacendepijamas.com/",
@@ -134,17 +115,6 @@ const shop_domaleather = require("./shops/domaleather");
       dateScraping,
       {
         tags: ["No gender"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-
-      "https://hosefa.com/",
-      "hosefa",
-      dateScraping,
-      {
-        tags: ["mujer"],
       }
     );
 
@@ -247,6 +217,38 @@ const shop_domaleather = require("./shops/domaleather");
       {
         tags: ["mujer"],
       }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.pumbo.com.ar/",
+      "pumbo",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+
+      "https://hosefa.com/",
+      "hosefa",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://shop.veroforest.com/",
+      "veroforest",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.florabikinis.com/",
+      "florabikinis",
+      dateScraping
     );
   } catch (error) {
     console.log(error);

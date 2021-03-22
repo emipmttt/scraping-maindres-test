@@ -1,4 +1,3 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 const autoScroll = require("../utils/autoScroll");
@@ -22,6 +21,8 @@ module.exports = async (page, dateScraping) => {
         nav = nav.map((category) => {
           return category.href;
         });
+
+        nav = [...new Set(nav)];
         return nav;
       });
 
@@ -100,47 +101,57 @@ module.exports = async (page, dateScraping) => {
             isTrueProduct = false;
           }
           if (isTrueProduct) {
-            const webData = await page.evaluate(() => {
-              var data = {};
+            try {
+              const webData = await page.evaluate(() => {
+                var data = {};
 
-              data.image = document.querySelector(
-                ".product-image-gallery #img_main"
-              ).src;
-              data.name = document.querySelector("h1").innerText;
-              if (document.querySelector(".special-price")) {
-                data.price = document.querySelector(".price").innerText;
-              } else if (document.querySelector("regular-price")) {
-                data.price = document.querySelector(".price").innerText;
-              }
+                data.image = document.querySelector(
+                  ".product-image-gallery #img_main"
+                ).src;
+                data.name = document.querySelector("h1").innerText;
+                if (document.querySelector(".special-price")) {
+                  data.price = document.querySelector(
+                    ".special-price .price"
+                  ).innerText;
+                } else if (document.querySelector(".regular-price")) {
+                  data.price = document.querySelector(
+                    ".regular-price .price"
+                  ).innerText;
+                }
 
-              if (document.querySelector(".old-price .price"))
-                data.oldPrice = document.querySelector(
-                  ".old-price .price"
-                ).innerText;
+                if (document.querySelector(".old-price .price"))
+                  data.oldPrice = document.querySelector(
+                    ".old-price .price"
+                  ).innerText;
+                else data.oldPrice = data.price;
 
-              data.originalId = document.location.href;
-              data.url = document.location.href;
+                data.originalId = document.location.href;
+                data.url = document.location.href;
 
-              if (document.querySelector(".panel-body ul")) {
-                data.description = document.querySelector(
-                  ".panel-body ul"
-                ).innerText;
-              } else {
-                data.description = data.name;
-              }
+                if (document.querySelector(".panel-body ul")) {
+                  data.description = document.querySelector(
+                    ".panel-body ul"
+                  ).innerText;
+                } else {
+                  data.description = data.name;
+                }
 
-              data.brand = {
-                title: "lazarocuero",
-                url: "https://www.lazarocuero.com.ar/",
-              };
-              return data;
-            });
+                data.brand = {
+                  title: "lazarocuero",
+                  url: "https://www.lazarocuero.com.ar/",
+                };
+                return data;
+              });
 
-            const product = buildProduct(webData, ["accesorios"], {
-              deleteDots: ".",
-            });
-            await addProduct(product, dateScraping);
-            productAdded++;
+              const product = buildProduct(webData, ["accesorios"], {
+                deleteDots: ".",
+              });
+              await addProduct(product, dateScraping);
+              productAdded++;
+            } catch (error) {
+              console.log("No se pudieron cargar los datos" + productUrl);
+              console.log(error);
+            }
           }
         }
       }

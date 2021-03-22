@@ -1,7 +1,5 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
-const fs = require("fs");
 // const autoScroll = require("../utils/autoScroll");
 
 module.exports = async (page, dateScraping) => {
@@ -39,12 +37,10 @@ module.exports = async (page, dateScraping) => {
       for (category of routes) {
         if (category != null) {
           console.log("[Categoría]: " + category);
-          console.log("Oklan muestra más productos a través de un botón");
 
           await page.goto(category);
 
           const clickOnShowMore = async () => {
-            console.log("Intentando mostrar más productos a través del botón");
             await page.waitForTimeout(1000);
 
             try {
@@ -53,7 +49,6 @@ module.exports = async (page, dateScraping) => {
               });
 
               await page.click("#loadMoreBtn");
-              console.log("Botón encontrado, cargando más productos...");
               await clickOnShowMore();
             } catch (error) {
               console.log("No se pudo Mostrar Productos...");
@@ -159,13 +154,6 @@ module.exports = async (page, dateScraping) => {
         (finishDate.valueOf() - startDate.valueOf()) / 1000 / 60
       }] - ${newProductsLength} productos En total`;
       console.log(brandMessage);
-      fs.appendFile(
-        `log/scraping_resume_${dateScraping}.txt`,
-        brandMessage + "\n",
-        (err) => {
-          if (err) throw err;
-        }
-      );
     }
   } catch (error) {
     console.log(error);

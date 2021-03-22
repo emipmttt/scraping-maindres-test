@@ -14,6 +14,13 @@ const tags = [
   { title: "plantas", options: ["plantas", "plantass"] },
   { title: "jungla", options: ["jungla", "junglas"] },
   { title: "gales", options: ["gales", "galess"] },
+  { title: "Floreadas", options: ["Floreadas", "Floreado"] },
+  { title: "perfume", options: ["perfume"] },
+  { title: "Arremangado", options: ["Arremangado"] },
+  { title: "Lunares", options: ["Lunares"] },
+  { title: "Gris melange", options: ["Gris melange"] },
+  { title: "Chaleco", options: ["chaleco"] },
+  { title: "Chaleco de vestir", options: ["Chaleco de vestir"] },
   {
     title: "principe de gales",
     options: ["principe de gales", "principe de galess"],
