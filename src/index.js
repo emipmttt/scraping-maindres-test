@@ -30,7 +30,7 @@ const shop_domaleather = require("./shops/domaleather");
         height: 800,
       },
       args: [`--window-size=${1300},${800}`],
-      headless: false, // este va descomentado para ver el navegador
+      // headless: false, // este va descomentado para ver el navegador
     });
 
     const page = await browser.newPage();
