@@ -40,8 +40,10 @@ const shop_domaleather = require("./shops/domaleather");
     const dateScraping = 1615399414960;
 
     // fixing
+    await shop_muaa(page, dateScraping);
 
     //
+
     await shop_tuck(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_keybiscayne(page, dateScraping);
@@ -62,7 +64,6 @@ const shop_domaleather = require("./shops/domaleather");
     await shop_equus(page, dateScraping);
 
     // to fix
-    await shop_muaa(page, dateScraping);
     await shop_sweetvictorian(page, dateScraping);
   } catch (error) {
     console.log(error);
