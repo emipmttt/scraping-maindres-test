@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const shop_tiendanube = require("./shops/tiendanube");
 const shop_tuck = require("./shops/tuck.js");
 const shop_desiderata = require("./shops/desiderata");
 const shop_keybiscayne = require("./shops/keybiscayne");
@@ -17,8 +18,12 @@ const shop_sweetvictorian = require("./shops/sweetvictorian");
 const shop_lazarocuero = require("./shops/lazarocuero");
 const shop_domaleather = require("./shops/domaleather");
 const shop_notlost = require("./shops/notlost.js");
+const shop_aeropostale = require("./shops/aeropostale");
+const shop_airborn = require("./shops/airborn");
+const shop_mariarivolta = require("./shops/mariarivolta");
+const shop_donne = require("./shops/donne");
 
-(async (event, context, callback) => {
+(async () => {
   let result = "result";
   let browser;
 
@@ -26,11 +31,6 @@ const shop_notlost = require("./shops/notlost.js");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      defaultViewport: {
-        width: 1300,
-        height: 800,
-      },
-      args: [`--window-size=${1300},${800}`],
       // headless: false, // este va descomentado para ver el navegador
     });
 
@@ -40,9 +40,12 @@ const shop_notlost = require("./shops/notlost.js");
 
     const dateScraping = 1615399414960;
 
-    // fixing
-
     //
+    await shop_donne(page, dateScraping);
+    await shop_mariarivolta(page, dateScraping);
+    await shop_airborn(page, dateScraping);
+    await shop_aeropostale(page, dateScraping);
+
     await shop_notlost(page, dateScraping);
     await shop_tuck(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
@@ -66,7 +69,5 @@ const shop_notlost = require("./shops/notlost.js");
 
     // to fix
     await shop_sweetvictorian(page, dateScraping);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 })();
