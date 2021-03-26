@@ -20,6 +20,7 @@ const shop_domaleather = require('./shops/domaleather');
 const shop_aeropostale = require('./shops/aeropostale');
 const shop_airborn = require('./shops/airborn');
 const shop_mariarivolta = require('./shops/mariarivolta');
+const shop_donne = require('./shops/donne');
 
 (async (event, context, callback) => {
   let result = 'result';
@@ -39,33 +40,34 @@ const shop_mariarivolta = require('./shops/mariarivolta');
     const dateScraping = 1615399414960;
 
     // scrapings nuevos
-    await shop_mariarivolta(page, dateScraping);
-    await shop_airborn(page, dateScraping);
-    await shop_aeropostale(page, dateScraping);
+    await shop_donne(page, dateScraping);
+    // await shop_mariarivolta(page, dateScraping);
+    // await shop_airborn(page, dateScraping);
+    // await shop_aeropostale(page, dateScraping);
 
     //
 
-    await shop_garzongarcia(page, dateScraping);
-    await shop_tresasesbasicos(page, dateScraping);
-    await shop_muaa(page, dateScraping);
-    await shop_oklan(page, dateScraping);
-    await shop_equus(page, dateScraping);
-    await shop_baronhirsch(page, dateScraping);
-    await shop_namer(page, dateScraping);
-    await shop_keybiscayne(page, dateScraping);
-    await shop_desiderata(page, dateScraping);
-    await shop_domaleather(page, dateScraping);
-    await shop_garzongarcia(page, dateScraping);
-    await shop_harveywillys(page, dateScraping);
+    // await shop_garzongarcia(page, dateScraping);
+    // await shop_tresasesbasicos(page, dateScraping);
+    // await shop_muaa(page, dateScraping);
+    // await shop_oklan(page, dateScraping);
+    // await shop_equus(page, dateScraping);
+    // await shop_baronhirsch(page, dateScraping);
+    // await shop_namer(page, dateScraping);
+    // await shop_keybiscayne(page, dateScraping);
+    // await shop_desiderata(page, dateScraping);
+    // await shop_domaleather(page, dateScraping);
+    // await shop_garzongarcia(page, dateScraping);
+    // await shop_harveywillys(page, dateScraping);
 
     // past
-    await shop_sweetvictorian(page, dateScraping);
-    await shop_tuck(page, dateScraping);
-    await shop_madnessclothing(page, dateScraping);
-    await shop_pielonline(page, dateScraping);
-    await shop_47street(page, dateScraping);
-    await shop_lazarocuero(page, dateScraping);
-    await shop_sweet(page, dateScraping);
+    // await shop_sweetvictorian(page, dateScraping);
+    // await shop_tuck(page, dateScraping);
+    // await shop_madnessclothing(page, dateScraping);
+    // await shop_pielonline(page, dateScraping);
+    // await shop_47street(page, dateScraping);
+    // await shop_lazarocuero(page, dateScraping);
+    // await shop_sweet(page, dateScraping);
   } catch (error) {
     console.log(error);
   }
