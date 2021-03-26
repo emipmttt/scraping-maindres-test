@@ -15,7 +15,7 @@ const tags = [
   { title: "jungla", options: ["jungla", "junglas"] },
   { title: "gales", options: ["gales", "galess"] },
   { title: "Floreadas", options: ["Floreadas", "Floreado"] },
-  { title: "perfume", options: ["perfume"] },
+  { title: "perfume", options: ["perfume", "fragancia"] },
   { title: "Arremangado", options: ["Arremangado"] },
   { title: "Lunares", options: ["Lunares"] },
   { title: "Gris melange", options: ["Gris melange"] },
@@ -621,7 +621,7 @@ const tags = [
 
   {
     title: "transparente",
-    options: ["transparente", "transparentes"],
+    options: ["transparente", "transparentes", "transparencias"],
   },
   {
     title: "rotura",
@@ -1315,6 +1315,7 @@ const tags = [
   { title: "Irregular", options: ["Irregular", "Irregulars"] },
   { title: "Falda", options: ["Falda", "Faldas"] },
   { title: "No gender", options: ["No gender", "No genders", "nogender"] },
+  { title: "unisex", options: ["unisex"] },
   { title: "Teen", options: ["Teen", "Teens"] },
   { title: "Amplio", options: ["Amplio", "Amplios"] },
   { title: "Cinto", options: ["Cinto", "Cintos"] },
@@ -1463,6 +1464,147 @@ const tags = [
   {
     title: "amplia curva de talles",
     options: ["amplia curva de talles", "amplia curva de talless"],
+  },
+  {
+    title: "brazalete",
+    options: ["brazalete", "brazaletes"],
+  },
+  {
+    title: "brazalete",
+    options: ["brazalete", "brazaletes"],
+  },
+  {
+    title: "caña baja",
+    options: ["caña baja"],
+  },
+  {
+    title: "caña alta",
+    options: ["caña alta"],
+  },
+  {
+    title: "texanas",
+    options: ["texana", "texanas"],
+  },
+  {
+    title: "monocromo",
+    options: ["monocromo", "monocromos"],
+  },
+  {
+    title: "cierre lateral",
+    options: ["cierre lateral"],
+  },
+  {
+    title: "hoodie",
+    options: ["hoodie"],
+  },
+  {
+    title: "reversible",
+    options: ["reversible"],
+  },
+  {
+    title: "chaleco",
+    options: ["chaleco"],
+  },
+  {
+    title: "degrade",
+    options: ["degrade"],
+  },
+  {
+    title: "belleza",
+    options: ["belleza", "estética"],
+  },
+  {
+    title: "pata de elefante",
+    options: ["pata de elefante"],
+  },
+  {
+    title: "vibrador",
+    options: ["vibrador", "vibradores"],
+  },
+  {
+    title: "vibrador",
+    options: ["vibrador"],
+  },
+  {
+    title: "breteles regulables",
+    options: ["breteles regulables"],
+  },
+  {
+    title: "breteles desmontables",
+    options: ["breteles desmontables"],
+  },
+  {
+    title: "muestra",
+    options: ["muestra"],
+  },
+  {
+    title: "suela tractor",
+    options: ["suela tractor"],
+  },
+  {
+    title: "stiletto",
+    options: ["stiletto"],
+  },
+  {
+    title: "goma antideslizante",
+    options: ["goma antideslizante"],
+  },
+  {
+    title: "oro",
+    options: ["oro"],
+  },
+  {
+    title: "bronce",
+    options: ["bronce"],
+  },
+  {
+    title: "cuello bote",
+    options: ["cuello bote"],
+  },
+  {
+    title: "recortes",
+    options: ["recortes", "recorte"],
+  },
+  {
+    title: "handmade",
+    options: ["handmade"],
+  },
+
+  {
+    title: "Sin costuras",
+    options: ["sin costuras"],
+  },
+  {
+    title: "espalda cruzada",
+    options: ["espalda cruzada"],
+  },
+  {
+    title: "barbijo",
+    options: ["barbijo"],
+  },
+  {
+    title: "tubo",
+    options: ["tubo", "tubos"],
+  },
+  {
+    title: "cárdigan",
+    options: ["cárdigan"],
+  },
+  {
+    title: "chaleco",
+    options: ["chaleco", "chalecos"],
+  },
+  {
+    title: "poncho",
+    options: ["poncho", "ponchos"],
+  },
+  {
+    title: "lima",
+    options: ["lima"],
+  },
+  {
+    title: "breteles cruzados",
+    options: ["breteles cruzados"],
   },
 ];
 

@@ -11,12 +11,12 @@ module.exports = async (product, dateScraping) => {
     newProduct.lastUpdate = dateScraping;
     newProduct.image = product.image;
     await mongo.update("products", productId, newProduct);
-    console.log(product.name + ` (actualizado) `);
+    console.log(product.name + " - " + product.price + ` (actualizado) `);
     console.log(product.tags.join());
   } else {
     product.lastUpdate = dateScraping;
     await mongo.create("products", product);
-    console.log(product.name + ` (nuevo) `);
+    console.log(product.name + " - " + product.price + ` (nuevo) `);
     console.log(product.tags.join());
   }
 };

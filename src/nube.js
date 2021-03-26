@@ -26,7 +26,7 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      headless: false,
+      // headless: false,
     });
 
     const page = await browser.newPage();
@@ -36,35 +36,54 @@ const shop_domaleather = require("./shops/domaleather");
 
     await shop_tiendanube(
       page,
-      "https://www.almacendepijamas.com/",
-      "almacendepijamas",
-      dateScraping
-    );
-    await shop_tiendanube(
-      page,
       "https://tienda.melinapinedo.com/mx/",
       "melinapinedo",
-      dateScraping
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.dynamark.com.ar/",
-      "dynamark",
-      dateScraping
-    );
-    await shop_tiendanube(
-      page,
-      "https://www.anagray.com/",
-      "anagray",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
       page,
       "https://www.barbarab.com.ar/",
       "barbarab",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer", "accesorios"] }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.pretzeloficial.com/",
+      "pretzeloficial",
+      dateScraping,
+      {
+        tags: ["no gender", "unisex"],
+        options: {
+          deleteDots: ".",
+        },
+      }
+    );
+
+    // await shop_tiendanube(
+    //   page,
+    //   "https://www.almacendepijamas.com/",
+    //   "almacendepijamas",
+    //   dateScraping,
+    //   { tags: ["mujer", "accesorios", "cartera"] }
+    // );
+
+    await shop_tiendanube(
+      page,
+      "https://www.dynamark.com.ar/",
+      "dynamark",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
+    await shop_tiendanube(
+      page,
+      "https://www.anagray.com/",
+      "anagray",
+      dateScraping,
+      { tags: ["Mujer"] }
     );
 
     await shop_tiendanube(
@@ -73,7 +92,7 @@ const shop_domaleather = require("./shops/domaleather");
       "battlo2",
       dateScraping,
       {
-        tags: ["mujer", "accesorios", "cartera"],
+        tags: ["mujer", "accesorios"],
         options: {
           deleteDots: ".",
         },
@@ -86,7 +105,7 @@ const shop_domaleather = require("./shops/domaleather");
       "cajubags",
       dateScraping,
       {
-        tags: ["accesorios"],
+        tags: ["accesorios", "mujer"],
       }
     );
     // past
@@ -105,16 +124,9 @@ const shop_domaleather = require("./shops/domaleather");
       page,
       "https://www.mankioficial.com/",
       "mankioficial",
-      dateScraping
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.pretzeloficial.com/",
-      "pretzeloficial",
       dateScraping,
       {
-        tags: ["No gender"],
+        tags: ["hombre"],
       }
     );
 
@@ -132,7 +144,7 @@ const shop_domaleather = require("./shops/domaleather");
       "https://bullbags.mitiendanube.com/",
       "bullbags",
       dateScraping,
-      { tags: ["accesorios"] }
+      { tags: ["accesorios", "mujer"] }
     );
     await shop_tiendanube(
       page,
@@ -140,7 +152,7 @@ const shop_domaleather = require("./shops/domaleather");
       "https://mulukstore.mitiendanube.com/",
       "mulukstore",
       dateScraping,
-      { tags: ["accesorios"] }
+      { tags: ["accesorios", "mujer"] }
     );
 
     await shop_tiendanube(
@@ -160,14 +172,15 @@ const shop_domaleather = require("./shops/domaleather");
       "anastasiamonaco",
       dateScraping,
       {
-        tags: ["mujer"],
+        tags: ["mujer", "Lencería"],
       }
     );
     await shop_tiendanube(
       page,
       "https://shop.innocenza.com.ar/",
       "innocenza",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
@@ -184,20 +197,23 @@ const shop_domaleather = require("./shops/domaleather");
       "https://jotabags.com/",
       "jotabags",
       dateScraping,
-      [{ tags: ["accesorios"] }]
+      { tags: ["mujer", "accesorios"] }
     );
     await shop_tiendanube(
       page,
       "https://myrollingbag.mitiendanube.com/",
       "myrollingbag",
       dateScraping,
-      { tags: ["accesorios"] }
+      { tags: ["accesorios", "mujer"] }
     );
     await shop_tiendanube(
       page,
       "https://notnaked.com.ar/",
       "notnaked",
-      dateScraping
+      dateScraping,
+      {
+        tags: ["mujer", "plus size"],
+      }
     );
     await shop_tiendanube(
       page,
@@ -223,7 +239,8 @@ const shop_domaleather = require("./shops/domaleather");
       page,
       "https://www.pumbo.com.ar/",
       "pumbo",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
@@ -241,14 +258,18 @@ const shop_domaleather = require("./shops/domaleather");
       page,
       "https://shop.veroforest.com/",
       "veroforest",
-      dateScraping
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
     );
 
     await shop_tiendanube(
       page,
       "https://www.florabikinis.com/",
       "florabikinis",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer", "mallas"] }
     );
   } catch (error) {
     console.log(error);

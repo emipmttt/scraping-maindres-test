@@ -16,6 +16,7 @@ const shop_47street = require("./shops/47street");
 const shop_sweetvictorian = require("./shops/sweetvictorian");
 const shop_lazarocuero = require("./shops/lazarocuero");
 const shop_domaleather = require("./shops/domaleather");
+const shop_notlost = require("./shops/notlost.js");
 
 (async (event, context, callback) => {
   let result = "result";
@@ -25,11 +26,11 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      // defaultViewport: {
-      //   width: 1300,
-      //   height: 800,
-      // },
-      // args: [`--window-size=${1300},${800}`],
+      defaultViewport: {
+        width: 1300,
+        height: 800,
+      },
+      args: [`--window-size=${1300},${800}`],
       // headless: false, // este va descomentado para ver el navegador
     });
 
@@ -40,10 +41,9 @@ const shop_domaleather = require("./shops/domaleather");
     const dateScraping = 1615399414960;
 
     // fixing
-    await shop_muaa(page, dateScraping);
 
     //
-
+    await shop_notlost(page, dateScraping);
     await shop_tuck(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_keybiscayne(page, dateScraping);
@@ -54,6 +54,7 @@ const shop_domaleather = require("./shops/domaleather");
     await shop_harveywillys(page, dateScraping);
 
     // past
+    await shop_muaa(page, dateScraping);
     await shop_madnessclothing(page, dateScraping);
     await shop_pielonline(page, dateScraping);
     await shop_47street(page, dateScraping);

@@ -6,7 +6,7 @@ const DB_HOST = "maindres.h0cr3.mongodb.net";
 const DB_NAME = "maindres";
 
 const MONGO_URI = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
-console.log(MONGO_URI);
+// console.log(MONGO_URI);
 
 const client = new MongoClient(MONGO_URI, {
   useNewUrlParser: true,

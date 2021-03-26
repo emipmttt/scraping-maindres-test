@@ -10,21 +10,12 @@ module.exports = async (page, dateScraping) => {
       const startDate = new Date();
       var productLenght = 0;
       try {
-        await page.goto("https://www.lazarocuero.com.ar/");
-        console.log("______LAZAROCUERO______");
+        console.log("______NOT LOST______");
       } catch (error) {}
 
       await page.waitForTimeout(1000);
 
-      const routes = await page.evaluate(async () => {
-        var nav = Array.from(document.querySelectorAll(".level0 a"));
-        nav = nav.map((category) => {
-          return category.href;
-        });
-
-        nav = [...new Set(nav)];
-        return nav;
-      });
+      const routes = ["http://notlost.store/productos/"];
 
       console.log("Categorías encontradas: ");
       console.log("\n" + routes.join("\n"));
@@ -42,7 +33,7 @@ module.exports = async (page, dateScraping) => {
             let localProducts = await page.evaluate(() => {
               return new Promise((resolve) => {
                 let products = Array.from(
-                  document.querySelectorAll(".product-image")
+                  document.querySelectorAll(".products li a")
                 );
 
                 products = products.map((el) => {
@@ -56,12 +47,12 @@ module.exports = async (page, dateScraping) => {
             });
 
             products = [...products, ...localProducts];
-            console.log("Intentando Mostrar más productos");
-            await page.waitForTimeout(1000);
-            await page.click(".toolbar-bottom .next");
-            showScreen++;
+            // console.log("Intentando Mostrar más productos");
+            // await page.waitForTimeout(1000);
+            // await page.click(".toolbar-bottom .next");
+            // showScreen++;
             // console.log('Se encontraron más prodcutos');
-            await getProducts();
+            // await getProducts();
           } catch (error) {
             console.log(
               `Se obtuvieron ${showScreen} paginas de esta sección ${category}`
@@ -90,7 +81,7 @@ module.exports = async (page, dateScraping) => {
           var isTrueProduct = false;
 
           try {
-            await page.waitForSelector(".product-image-gallery #img_main", {
+            await page.waitForSelector(".wp-post-image", {
               timeout: 3000,
             });
             isTrueProduct = true;
@@ -105,46 +96,39 @@ module.exports = async (page, dateScraping) => {
               const webData = await page.evaluate(() => {
                 var data = {};
 
-                data.image = document.querySelector(
-                  ".product-image-gallery #img_main"
-                ).src;
+                data.image = document.querySelector(".wp-post-image").src;
                 data.name = document.querySelector("h1").innerText;
-                if (document.querySelector(".special-price")) {
-                  data.price = document.querySelector(
-                    ".special-price .price"
-                  ).innerText;
-                } else if (document.querySelector(".regular-price")) {
-                  data.price = document.querySelector(
-                    ".regular-price .price"
-                  ).innerText;
+                if (document.querySelector(".price")) {
+                  data.price = document.querySelector(".price").innerText;
                 }
 
-                if (document.querySelector(".old-price .price"))
-                  data.oldPrice = document.querySelector(
-                    ".old-price .price"
-                  ).innerText;
-                else data.oldPrice = data.price;
+                data.oldPrice = data.price;
 
                 data.originalId = document.location.href;
                 data.url = document.location.href;
 
-                if (document.querySelector(".panel-body ul")) {
+                if (
+                  document.querySelector(
+                    "woocommerce-product-details__short-description"
+                  )
+                ) {
                   data.description = document.querySelector(
-                    ".panel-body ul"
+                    "woocommerce-product-details__short-description"
                   ).innerText;
                 } else {
                   data.description = data.name;
                 }
 
                 data.brand = {
-                  title: "lazarocuero",
-                  url: "https://www.lazarocuero.com.ar/",
+                  title: "notlost",
+                  url: "https://notlost.store/",
                 };
+
                 return data;
               });
 
-              const product = buildProduct(webData, ["accesorios", "mujer"], {
-                deleteDots: ".",
+              const product = buildProduct(webData, ["unisex", "no gender"], {
+                deleteDots: ",",
               });
               await addProduct(product, dateScraping);
               productAdded++;
@@ -160,7 +144,7 @@ module.exports = async (page, dateScraping) => {
 
       const minutes = (finishDate.valueOf() - startDate.valueOf()) / 1000 / 60;
 
-      const brandMessage = `[LAZAROCUERO][${minutes}] -  Se han cargado ${productAdded} de ${productLenght} productos encontrados [${
+      const brandMessage = `[NOTLOST][${minutes}] -  Se han cargado ${productAdded} de ${productLenght} productos encontrados [${
         (productAdded * 100) / productLenght
       } %] `;
 

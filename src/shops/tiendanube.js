@@ -39,9 +39,18 @@ module.exports = async (page, URLShop, brandName, dateScraping, options) => {
 
     const products = await page.evaluate(() => {
       return new Promise((resolve) => {
-        let products = Array.from(
-          document.querySelectorAll(".js-item-product a")
-        );
+        let products;
+        if (
+          Array.from(document.querySelectorAll(".js-item-product a")).length
+        ) {
+          products = Array.from(
+            document.querySelectorAll(".js-item-product a")
+          );
+        } else if (
+          Array.from(document.querySelectorAll(".item-product a")).length
+        ) {
+          products = Array.from(document.querySelectorAll(".item-product a"));
+        }
 
         products = products.map((el) => {
           return el.href;
@@ -102,6 +111,8 @@ module.exports = async (page, URLShop, brandName, dateScraping, options) => {
               data.name = document.querySelector("#product-name").innerText;
             } else if (document.querySelector(".product-name")) {
               data.name = document.querySelector(".product-name").innerText;
+            } else if (document.querySelector("h1")) {
+              data.name = document.querySelector("h1").innerText;
             }
 
             if (document.querySelector("#price_display")) {
