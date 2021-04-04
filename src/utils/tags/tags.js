@@ -1,4 +1,5 @@
 const tags = [
+  { title: "Blanco y negro", options: ["Blanco y negro", "Blanco y negro"] },
   { title: "Tarjetero", options: ["Tarjetero", "Tarjeteros"] },
   { title: "Billetera", options: ["Billetera", "Billeteras"] },
   { title: "Corbata", options: ["Corbata", "Corbatas"] },
@@ -1332,7 +1333,6 @@ const tags = [
   { title: "Tejido", options: ["Tejido", "Tejidos"] },
   { title: "Frunce", options: ["Frunce", "Frunces"] },
   { title: "Clásica", options: ["Clásica", "Clásicas"] },
-  { title: "Blanco y negro", options: ["Blanco y negro", "Blanco y negros"] },
   { title: "Suela de goma", options: ["Suela de goma", "Suela de gomas"] },
   { title: "Tira", options: ["Tira", "Tiras"] },
   { title: "Tiras", options: ["Tiras", "Tirass"] },

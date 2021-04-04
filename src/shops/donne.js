@@ -1,19 +1,19 @@
-const buildProduct = require('../utils/buildProduct');
-const addProduct = require('../utils/addProduct');
-const autoScroll = require('../utils/autoScroll');
+const buildProduct = require("../utils/buildProduct");
+const addProduct = require("../utils/addProduct");
+const autoScroll = require("../utils/autoScroll");
 
 module.exports = async (page, dateScraping) => {
   try {
     {
       try {
-        await page.goto('https://www.donne.com.ar/');
+        await page.goto("https://www.donne.com.ar/");
       } catch (error) {}
 
       const routes = await page.evaluate(async () => {
         // routes es el array que guarda los enlaces
         // de las categorías
         let nav = Array.from(
-          document.querySelectorAll('.nav-item .w-100 a.list-styled-link')
+          document.querySelectorAll(".nav-item .w-100 a.list-styled-link")
         );
         nav = nav.map((category) => {
           return category.href;
@@ -28,7 +28,7 @@ module.exports = async (page, dateScraping) => {
 
       for (category of routes) {
         if (category != null) {
-          console.log('[CATEGORY] - Abriendo ' + category);
+          console.log("[CATEGORY] - Abriendo " + category);
 
           await page.goto(category);
 
@@ -38,15 +38,15 @@ module.exports = async (page, dateScraping) => {
             await page.waitForTimeout(1000);
 
             try {
-              await page.waitForSelector('a.page-link-arrow .fa-caret-right', {
+              await page.waitForSelector("a.page-link-arrow .fa-caret-right", {
                 timeout: 3000,
               });
 
-              await page.click('a.page-link-arrow .fa-caret-right');
+              await page.click("a.page-link-arrow .fa-caret-right");
 
               await clickOnShowMore();
             } catch (error) {
-              console.log('No se pudo Mostrar Productos');
+              console.log("No se pudo Mostrar Productos");
               console.log(error);
             }
           };
@@ -56,7 +56,7 @@ module.exports = async (page, dateScraping) => {
           const products = await page.evaluate(() => {
             return new Promise((resolve) => {
               let products = Array.from(
-                document.querySelectorAll('.product-price a.text-dark')
+                document.querySelectorAll(".product-price a.text-dark")
               );
 
               products = products.map((el) => {
@@ -73,18 +73,18 @@ module.exports = async (page, dateScraping) => {
             try {
               await page.goto(productUrl);
             } catch (error) {
-              console.log('Error al abrir el producto', productUrl);
+              console.log("Error al abrir el producto", productUrl);
             }
 
             var isTrueProduct = false;
 
             try {
-              await page.waitForSelector('h2.text-uppercase', {
+              await page.waitForSelector("h2.text-uppercase", {
                 timeout: 3000,
               });
               isTrueProduct = true;
             } catch {
-              console.log('Imagen no encontrada', productUrl);
+              console.log("Imagen no encontrada", productUrl);
               isTrueProduct = false;
             }
             if (isTrueProduct) {
@@ -92,20 +92,20 @@ module.exports = async (page, dateScraping) => {
                 const webData = await page.evaluate(() => {
                   var data = {};
 
-                  data.image = document.querySelector('.item .img-fluid').src;
+                  data.image = document.querySelector(".item .img-fluid").src;
 
                   data.name = document.querySelector(
-                    'h2.text-uppercase'
+                    "h2.text-uppercase"
                   ).innerText;
-                  if (document.querySelector('.price')) {
+                  if (document.querySelector(".price")) {
                     data.price = document.querySelector(
-                      '.price span'
+                      ".price span"
                     ).innerText;
                   }
 
-                  if (document.querySelector('.price del')) {
+                  if (document.querySelector(".price del")) {
                     data.oldPrice = document.querySelector(
-                      '.price del'
+                      ".price del"
                     ).innerText;
                   }
                   //else {
@@ -117,18 +117,20 @@ module.exports = async (page, dateScraping) => {
 
                   data.description =
                     data.name +
-                    ' ' +
-                    document.querySelector('p.text-black').innerText;
+                    " " +
+                    document.querySelector("p.text-black").innerText;
 
                   data.brand = {
-                    title: 'donne',
-                    url: 'https://www.donne.com.ar/',
+                    title: "donne",
+                    url: "https://www.donne.com.ar/",
                   };
                   console.log(data);
                   return data;
                 });
 
-                const product = buildProduct(webData, ['mujer']);
+                const product = buildProduct(webData, ["mujer", "calzado"], {
+                  deleteDots: ".",
+                });
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

@@ -41,12 +41,14 @@ const shop_donne = require("./shops/donne");
     const dateScraping = 1615399414960;
 
     //
+    await shop_notlost(page, dateScraping);
+
+
+    await shop_airborn(page, dateScraping);
     await shop_donne(page, dateScraping);
     await shop_mariarivolta(page, dateScraping);
-    await shop_airborn(page, dateScraping);
     await shop_aeropostale(page, dateScraping);
 
-    await shop_notlost(page, dateScraping);
     await shop_tuck(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_keybiscayne(page, dateScraping);

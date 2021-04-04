@@ -1,9 +1,7 @@
 Adriana Constantini: Mujer
 Agus Chueizer: Mujer
-Airborn: Hombre
 Calipsian: Mujer, Mallas
 Cumbre: Mujer
-Donne: Mujer, Calzado
 Helena Boutique: Mujer
 Klihor: Mujer, Plus Size
 Las Lobas: Mujer
