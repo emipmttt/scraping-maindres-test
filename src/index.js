@@ -22,6 +22,8 @@ const shop_aeropostale = require("./shops/aeropostale");
 const shop_airborn = require("./shops/airborn");
 const shop_mariarivolta = require("./shops/mariarivolta");
 const shop_donne = require("./shops/donne");
+const shop_mercionline = require("./shops/mercionline");
+const shop_tiendaroland = require("./shops/tiendaroland");
 
 (async () => {
   let result = "result";
@@ -42,7 +44,10 @@ const shop_donne = require("./shops/donne");
 
     //
     await shop_notlost(page, dateScraping);
+    await shop_tiendaroland(page, dateScraping);
+    await shop_mercionline(page, dateScraping);
 
+    return;
 
     await shop_airborn(page, dateScraping);
     await shop_donne(page, dateScraping);

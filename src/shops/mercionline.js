@@ -6,13 +6,14 @@ module.exports = async (page, dateScraping) => {
   try {
     {
       try {
-        await page.goto("https://www.airborn.com.ar");
+        await page.goto("https://www.mercionline.com/");
+        console.log("___mercionline___");
       } catch (error) {}
 
       const routes = await page.evaluate(async () => {
         // routes es el array que guarda los enlaces
         // de las categorías
-        let nav = Array.from(document.querySelectorAll("#menu a"));
+        let nav = Array.from(document.querySelectorAll(".zmzdJ a"));
         nav = nav.map((category) => {
           return category.href;
         });
@@ -36,11 +37,11 @@ module.exports = async (page, dateScraping) => {
             await page.waitForTimeout(1000);
 
             try {
-              await page.waitForSelector("#loadMoreBtn", {
-                timeout: 3000,
+              await page.waitForSelector('[data-hook="load-more-button"]', {
+                timeout: 5000,
               });
 
-              await page.click("#loadMoreBtn");
+              await page.click('[data-hook="load-more-button"]');
 
               await clickOnShowMore();
             } catch (error) {
@@ -53,7 +54,11 @@ module.exports = async (page, dateScraping) => {
 
           const products = await page.evaluate(() => {
             return new Promise((resolve) => {
-              let products = Array.from(document.querySelectorAll(".title a"));
+              let products = Array.from(
+                document.querySelectorAll(
+                  "[data-hook='product-list-grid-item'] a"
+                )
+              );
 
               products = products.map((el) => {
                 return el.href;
@@ -65,6 +70,8 @@ module.exports = async (page, dateScraping) => {
             });
           });
 
+          console.log("Productos encontrados: " + products.length);
+
           for (productUrl of products) {
             try {
               await page.goto(productUrl);
@@ -75,7 +82,7 @@ module.exports = async (page, dateScraping) => {
             var isTrueProduct = false;
 
             try {
-              await page.waitForSelector(".jTscroller .cloud-zoom-gallery", {
+              await page.waitForSelector("[data-hook='product-image']", {
                 timeout: 3000,
               });
               isTrueProduct = true;
@@ -89,19 +96,27 @@ module.exports = async (page, dateScraping) => {
                   var data = {};
 
                   data.image = document.querySelector(
-                    ".jTscroller .cloud-zoom-gallery"
+                    "[data-hook='product-image']"
                   ).href;
 
-                  data.name = document.querySelector(".title h1").innerText;
-                  if (document.querySelector("#price_display")) {
+                  data.name = document.querySelector("h1").innerText;
+                  if (
+                    document.querySelector(
+                      '[data-hook="formatted-primary-price"]'
+                    )
+                  ) {
                     data.price = document.querySelector(
-                      "#price_display"
+                      '[data-hook="formatted-primary-price"]'
                     ).innerText;
                   }
 
-                  if (document.querySelector("#compare_price_display")) {
+                  if (
+                    document.querySelector(
+                      '[data-hook="formatted-secondary-price"]'
+                    )
+                  ) {
                     data.oldPrice = document.querySelector(
-                      "#compare_price_display"
+                      '[data-hook="formatted-secondary-price"]'
                     ).innerText;
                   } else {
                     data.oldPrice = data.price;
@@ -110,19 +125,29 @@ module.exports = async (page, dateScraping) => {
                   data.originalId = document.location.href;
                   data.url = document.location.href;
 
-                  // data.description =
-                  //   data.name +
-                  //   " " +
-                  //   document.querySelector("#detalles p").innerText;
+                  if (
+                    Array.from(
+                      document.querySelectorAll('[data-hook="description"] p')
+                    )[1] &&
+                    Array.from(
+                      document.querySelectorAll('[data-hook="description"] p')
+                    )[1].innerText
+                  ) {
+                    data.description = Array.from(
+                      document.querySelectorAll('[data-hook="description"] p')
+                    )[1].innerText;
+                  }
+
+                  data.description = data.name;
 
                   data.brand = {
-                    title: "airborn",
-                    url: "https://www.airborn.com.ar/",
+                    title: "mercionline",
+                    url: "https://www.mercionline.com/",
                   };
                   return data;
                 });
 
-                const product = buildProduct(webData, ["hombre"]);
+                const product = buildProduct(webData, ["mujer"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);
