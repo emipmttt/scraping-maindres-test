@@ -36,12 +36,17 @@ module.exports = async (page, dateScraping) => {
               await page.waitForSelector('.next', {
                 timeout: 3000,
               });
-              await page.waitForSelector('.next.pgEmpty', {
-                timeout: 3000,
-              });
 
               await page.click('.next');
-
+              // TotalProducts = 0;
+              // productos = products();
+              // if (totalProductos < productos) {
+              //   // Significa que el número de productos aumento
+              //   totalProductos = productos;
+              //   // clickOnShowMore()
+              // } else if (totalProducts == productos) {
+              //   // significa que ya no está aumentando el número de productos, por lo tanto ya están todos. (no hay más productos)
+              // }
               await clickOnShowMore();
             } catch (error) {
               console.log('No se pudo Mostrar Productos');
