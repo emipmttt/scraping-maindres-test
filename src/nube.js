@@ -26,7 +26,7 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      headless: false,
+      // headless: false,
     });
 
     const page = await browser.newPage();
