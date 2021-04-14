@@ -44,9 +44,9 @@ const shop_adrianacostantini = require("./shops/adrianacostantini");
     const dateScraping = 1615399414960;
 
     // scrapings nuevos
-    await shop_littleparadise(page, dateScraping);
     await shop_adrianacostantini(page, dateScraping);
     await shop_queenjuana(page, dateScraping);
+    await shop_littleparadise(page, dateScraping);
 
     return;
 

@@ -1,18 +1,18 @@
-const buildProduct = require('../utils/buildProduct');
-const addProduct = require('../utils/addProduct');
-const autoScroll = require('../utils/autoScroll');
+const buildProduct = require("../utils/buildProduct");
+const addProduct = require("../utils/addProduct");
+const autoScroll = require("../utils/autoScroll");
 
 module.exports = async (page, dateScraping) => {
   try {
     {
       try {
-        await page.goto('https://www.adrianacostantini.com.ar/');
+        await page.goto("https://www.adrianacostantini.com.ar/");
       } catch (error) {}
 
       const routes = await page.evaluate(async () => {
         // routes es el array que guarda los enlaces
         // de las categorías
-        let nav = Array.from(document.querySelectorAll('.menu-lg li a'));
+        let nav = Array.from(document.querySelectorAll(".menu-lg li a"));
         nav = nav.map((category) => {
           return category.href;
         });
@@ -23,7 +23,7 @@ module.exports = async (page, dateScraping) => {
 
       for (category of routes) {
         if (category != null) {
-          console.log('[CATEGORY] - Abriendo ' + category);
+          console.log("[CATEGORY] - Abriendo " + category);
 
           await page.goto(category);
 
@@ -53,7 +53,7 @@ module.exports = async (page, dateScraping) => {
 
           const products = await page.evaluate(() => {
             return new Promise((resolve) => {
-              let products = Array.from(document.querySelectorAll('.canvas a'));
+              let products = Array.from(document.querySelectorAll(".canvas a"));
 
               products = products.map((el) => {
                 return el.href;
@@ -68,23 +68,21 @@ module.exports = async (page, dateScraping) => {
           for (productUrl of products) {
             try {
               await page.goto(productUrl);
-              console.log('Se abrió url correctamente');
+              console.log("Se abrió url correctamente");
             } catch (error) {
-              console.log('Error al abrir el producto');
+              console.log("Error al abrir el producto");
             }
 
             var isTrueProduct = false;
 
-            console.log('Intentando encontrar imagen');
-
             try {
-              await page.waitForSelector('h1', {
+              await page.waitForSelector("h1", {
                 timeout: 3000,
               });
               isTrueProduct = true;
-              console.log('Imagen1 encontrada');
+              console.log("Imagen1 encontrada");
             } catch {
-              console.log('Imagen1 no encontrada');
+              console.log("Imagen1 no encontrada");
               isTrueProduct = false;
             }
             if (isTrueProduct) {
@@ -93,24 +91,24 @@ module.exports = async (page, dateScraping) => {
                   var data = {};
 
                   data.image = document.querySelector(
-                    '#zoomGrande .img-responsive'
-                  ).href;
-                  data.name = document.querySelector('h1').innerText;
+                    "#zoomGrande .img-responsive"
+                  ).src;
+                  data.name = document.querySelector("h1").innerText;
 
-                  if (document.querySelector('.precio strong')) {
+                  if (document.querySelector(".precio strong")) {
                     data.price = document.querySelector(
-                      '.precio strong:last-child'
+                      ".precio strong:last-child"
                     ).innerText;
                   } else {
-                    data.price = document.querySelector('.precio').innerText;
+                    data.price = document.querySelector(".precio").innerText;
                   }
 
-                  if (document.querySelector('.precio-anterior')) {
+                  if (document.querySelector(".precio-anterior")) {
                     data.oldPrice = document.querySelector(
-                      '.precio-anterior'
+                      ".precio-anterior"
                     ).innerText;
                   } else {
-                    data.oldPrice = document.querySelector('.precio').innerText;
+                    data.oldPrice = document.querySelector(".precio").innerText;
                   }
 
                   data.originalId = document.location.href;
@@ -118,17 +116,17 @@ module.exports = async (page, dateScraping) => {
 
                   data.description =
                     data.name +
-                    ' ' +
-                    document.querySelector('div.info p').innerText;
+                    " " +
+                    document.querySelector("div.info p").innerText;
 
                   data.brand = {
-                    title: 'adrianacostantini',
-                    url: 'https://www.adrianacostantini.com.ar/',
+                    title: "adrianacostantini",
+                    url: "https://www.adrianacostantini.com.ar/",
                   };
                   return data;
                 });
 
-                const product = buildProduct(webData, []);
+                const product = buildProduct(webData);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

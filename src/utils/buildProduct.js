@@ -39,7 +39,11 @@ const buildProduct = (product, pre_tags, options) => {
     }
   }
 
-  productBuilded.tags = [...pre_tags];
+  if (pre_tags) {
+    productBuilded.tags = [...pre_tags];
+  } else {
+    productBuilded.tags = [];
+  }
 
   for (item of tags) {
     for (const tag of item.options) {
