@@ -24,6 +24,7 @@ const shop_donne = require('./shops/donne');
 const shop_littleparadise = require('./shops/littleparadise');
 const shop_queenjuana = require('./shops/queenjuana');
 const shop_adrianacostantini = require('./shops/adrianacostantini');
+const shop_cumbrebuenosaires = require('./shops/cumbrebuenosaires');
 
 (async (event, context, callback) => {
   let result = 'result';
@@ -43,7 +44,8 @@ const shop_adrianacostantini = require('./shops/adrianacostantini');
     const dateScraping = 1615399414960;
 
     // scrapings nuevos
-    await shop_adrianacostantini(page, dateScraping);
+    await shop_cumbrebuenosaires(page, dateScraping);
+    // await shop_adrianacostantini(page, dateScraping);
     // await shop_queenjuana(page, dateScraping);
     // await shop_littleparadise(page, dateScraping);
     // await shop_donne(page, dateScraping);
