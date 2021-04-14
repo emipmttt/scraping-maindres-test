@@ -1,90 +1,84 @@
-const buildProduct = require('../utils/buildProduct');
-const addProduct = require('../utils/addProduct');
-const autoScroll = require('../utils/autoScroll');
+const buildProduct = require("../utils/buildProduct");
+const addProduct = require("../utils/addProduct");
+const autoScroll = require("../utils/autoScroll");
 
 module.exports = async (page, dateScraping) => {
   try {
     {
       try {
-        await page.goto('https://littleparadise.com.ar/index.php/tienda/');
+        await page.goto("https://littleparadise.com.ar/index.php/tienda/");
       } catch (error) {}
 
-      const routes = await page.evaluate(async () => {
-        // routes es el array que guarda los enlaces
-        // de las categorías
-        let nav = Array.from(document.querySelectorAll('a.category_item_link'));
-        nav = nav.map((category) => {
-          return category.href;
-        });
-        return nav;
-      });
-
-      console.log(routes);
+      const routes = ["https://littleparadise.com.ar/index.php/tienda/"];
 
       for (category of routes) {
         if (category != null) {
-          console.log('[CATEGORY] - Abriendo ' + category);
+          console.log("[CATEGORY] - Abriendo " + category);
 
           await page.goto(category);
 
-          // await autoScroll(page);
+          let products = [];
 
           const clickOnShowMore = async () => {
-            console.log('Intentando mostrar más productos');
             await page.waitForTimeout(1000);
 
             try {
-              await page.waitForSelector('.next', {
+              await autoScroll(page);
+
+              const localProducts = await page.evaluate(() => {
+                return new Promise((resolve) => {
+                  let products = Array.from(
+                    document.querySelectorAll(".product a")
+                  );
+
+                  products = products.map((el) => {
+                    return el.href;
+                  });
+
+                  products = [...new Set(products)];
+
+                  resolve(products);
+                });
+              });
+
+              products.push(localProducts);
+
+              await page.waitForSelector(".next", {
                 timeout: 3000,
               });
 
-              await page.click('.next');
+              await page.click(".next");
 
               await clickOnShowMore();
             } catch (error) {
-              console.log('No se pudo Mostrar Productos');
+              console.log("No se pudo Mostrar Productos");
               console.log(error);
             }
           };
 
           await clickOnShowMore();
 
-          const products = await page.evaluate(() => {
-            return new Promise((resolve) => {
-              let products = Array.from(
-                document.querySelectorAll('.loop-thumbnail')
-              );
+          products = products.flat();
+          products = [...new Set(products)]
 
-              products = products.map((el) => {
-                return el.href;
-              });
-
-              products = [...new Set(products)];
-
-              resolve(products);
-            });
-          });
+          console.log("Se encontraron " + products.length + " productos");
 
           for (productUrl of products) {
             try {
               await page.goto(productUrl);
-              console.log('Se abrió url correctamente');
             } catch (error) {
-              console.log('Error al abrir el producto');
+              console.log("Error al abrir el producto");
             }
 
             var isTrueProduct = false;
 
-            console.log('Intentando encontrar imagen');
-
             try {
-              await page.waitForSelector('.product_title', {
+              await page.waitForSelector(".product_title", {
                 timeout: 3000,
               });
               isTrueProduct = true;
-              console.log('Imagen1 encontrada');
             } catch {
-              console.log('Imagen1 no encontrada');
+              console.log("Imagen1 no encontrada");
               isTrueProduct = false;
             }
             if (isTrueProduct) {
@@ -93,33 +87,33 @@ module.exports = async (page, dateScraping) => {
                   var data = {};
 
                   data.image = document.querySelector(
-                    '.single-product-img '
+                    ".single-product-img "
                   ).src;
                   data.name = document.querySelector(
-                    '.product_title'
+                    ".product_title"
                   ).innerText;
 
                   if (
-                    document.querySelector('.product_summary_middle .price del')
+                    document.querySelector(".product_summary_middle .price del")
                   ) {
                     data.price = document.querySelector(
-                      '.product_summary_middle .price ins'
+                      ".product_summary_middle .price ins"
                     ).innerText;
                   } else {
                     data.price = document.querySelector(
-                      '.product_summary_middle .price .amount'
+                      ".product_summary_middle .price .amount"
                     ).innerText;
                   }
 
                   if (
-                    document.querySelector('.product_summary_middle .price del')
+                    document.querySelector(".product_summary_middle .price del")
                   ) {
                     data.oldPrice = document.querySelector(
-                      '.product_summary_middle .price del'
+                      ".product_summary_middle .price del"
                     ).innerText;
                   } else {
                     data.oldPrice = document.querySelector(
-                      '.product_summary_middle .price .amount'
+                      ".product_summary_middle .price .amount"
                     ).innerText;
                   }
 
@@ -128,21 +122,19 @@ module.exports = async (page, dateScraping) => {
 
                   data.description =
                     data.name +
-                    ' ' +
+                    " " +
                     document.querySelector(
-                      '.woocommerce-product-details__short-description'
+                      ".woocommerce-product-details__short-description"
                     ).innerText;
 
                   data.brand = {
-                    title: 'littleparadise',
-                    url: 'https://www.littleparadise.com.ar/',
+                    title: "littleparadise",
+                    url: "https://www.littleparadise.com.ar/",
                   };
                   return data;
                 });
 
-                console.log(webData);
-
-                const product = buildProduct(webData, ['hombre']);
+                const product = buildProduct(webData, ["bebe"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

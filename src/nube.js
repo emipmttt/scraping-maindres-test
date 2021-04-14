@@ -26,13 +26,57 @@ const shop_domaleather = require("./shops/domaleather");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      // headless: false,
+      headless: false,
     });
 
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(0);
 
     const dateScraping = 1615399414960;
+    await shop_tiendanube(page, "https://klihor.com/", "klihor", dateScraping);
+
+    await shop_tiendanube(
+      page,
+      "https://www.aguschueizer.com/",
+      "mitiendanube",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://laslobas.mitiendanube.com/",
+      "mitiendanube",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://shop.veroforest.com/",
+      "veroforest",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.calipsian.com/",
+      "calipsian",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.cumbrebuenosaires.com.ar/",
+      "cumbrebuenosaires",
+      dateScraping
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.almacendepijamas.com/",
+      "almacendepijamas",
+      dateScraping,
+      { limit: 500 }
+    );
 
     await shop_tiendanube(
       page,
@@ -70,14 +114,6 @@ const shop_domaleather = require("./shops/domaleather");
         },
       }
     );
-
-    // await shop_tiendanube(
-    //   page,
-    //   "https://www.almacendepijamas.com/",
-    //   "almacendepijamas",
-    //   dateScraping,
-    //   { tags: ["mujer", "accesorios", "cartera"] }
-    // );
 
     await shop_tiendanube(
       page,
