@@ -43,12 +43,11 @@ const shop_tiendaroland = require("./shops/tiendaroland");
     const dateScraping = 1615399414960;
 
     //
-    await shop_notlost(page, dateScraping);
     await shop_tiendaroland(page, dateScraping);
     await shop_mercionline(page, dateScraping);
 
     return;
-
+    await shop_notlost(page, dateScraping);
     await shop_airborn(page, dateScraping);
     await shop_donne(page, dateScraping);
     await shop_mariarivolta(page, dateScraping);

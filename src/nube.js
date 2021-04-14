@@ -36,6 +36,14 @@ const shop_domaleather = require("./shops/domaleather");
 
     await shop_tiendanube(
       page,
+      "https://www.silenelingerie.com.ar/",
+      "silenelingerie",
+      dateScraping
+      // { tags: ["mujer"] }
+    );
+
+    await shop_tiendanube(
+      page,
       "https://tienda.melinapinedo.com/mx/",
       "melinapinedo",
       dateScraping,

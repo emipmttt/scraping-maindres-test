@@ -97,7 +97,7 @@ module.exports = async (page, dateScraping) => {
 
                   data.image = document.querySelector(
                     "[data-hook='product-image']"
-                  ).href;
+                  ).src;
 
                   data.name = document.querySelector("h1").innerText;
                   if (

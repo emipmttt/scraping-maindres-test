@@ -95,7 +95,7 @@ module.exports = async (page, dateScraping) => {
                 const webData = await page.evaluate(() => {
                   var data = {};
 
-                  data.image = document.querySelector(".zoomImg").href;
+                  data.image = document.querySelector(".zoomImg").src;
 
                   data.name = document.querySelector("h1").innerText;
                   if (document.querySelector(".price")) {
@@ -117,12 +117,20 @@ module.exports = async (page, dateScraping) => {
                   data.originalId = document.location.href;
                   data.url = document.location.href;
 
-                  data.description =
-                    data.name +
-                    " " +
+                  if (
                     document.querySelector(
                       ".woocommerce-product-details__short-description"
-                    ).innerText;
+                    )
+                  ) {
+                    data.description =
+                      data.name +
+                      " " +
+                      document.querySelector(
+                        ".woocommerce-product-details__short-description"
+                      ).innerText;
+                  } else {
+                    data.description = data.name;
+                  }
 
                   data.brand = {
                     title: "tiendaroland",
@@ -134,7 +142,9 @@ module.exports = async (page, dateScraping) => {
                 const product = buildProduct(webData, []);
                 await addProduct(product, dateScraping);
               } catch (error) {
+                console.log("____");
                 console.log(error);
+                console.log("____");
               }
             }
           }
