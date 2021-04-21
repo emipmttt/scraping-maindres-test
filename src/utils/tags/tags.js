@@ -1606,6 +1606,79 @@ const tags = [
     title: "breteles cruzados",
     options: ["breteles cruzados"],
   },
+  {
+    title: "color salmón",
+    options: ["color salmón", "color salmóns"],
+  },
+  { title: "durazno", options: ["durazno", "duraznos"] },
+  { title: "tostado", options: ["tostado", "tostados"] },
+  {
+    title: "verde militar",
+    options: ["verde militar", "verde militars"],
+  },
+  { title: "verde agua", options: ["verde agua", "verde aguas"] },
+  { title: "terracota", options: ["terracota", "terracotas"] },
+  {
+    title: "manga princesa",
+    options: ["manga princesa", "manga princesas"],
+  },
+  { title: "frisa", options: ["frisa", "frisas"] },
+  {
+    title: "campera de jean O DENIM",
+    options: ["campera de jean O DENIM", "campera de jean O DENIMs"],
+  },
+  { title: "solero", options: ["solero", "soleros"] },
+  { title: "bolsillos", options: ["bolsillos", "bolsilloss"] },
+  { title: "necessaire", options: ["necessaire", "necessaires"] },
+  { title: "terciopelo", options: ["terciopelo", "terciopelos"] },
+  { title: "relleno", options: ["relleno", "rellenos"] },
+  {
+    title: "pantalon de pijama",
+    options: ["pantalon de pijama", "pantalon de pijamas"],
+  },
+  {
+    title: "remera de pijama",
+    options: ["remera de pijama", "remera de pijamas"],
+  },
+  {
+    title: "ropa de dormir",
+    options: ["ropa de dormir", "ropa de dormirs"],
+  },
+  {
+    title: "conjunto pijama corto",
+    options: ["conjunto pijama corto", "conjunto pijama cortos"],
+  },
+  {
+    title: "conjunto pijama largo",
+    options: ["conjunto pijama largo", "conjunto pijama largos"],
+  },
+  {
+    title: "remera manga larga pijama",
+    options: ["remera manga larga pijama", "remera manga larga pijamas"],
+  },
+  {
+    title: "remera manga corta pijama",
+    options: ["remera manga corta pijama", "remera manga corta pijamas"],
+  },
+  {
+    title: "transparencias",
+    options: ["transparencias", "transparenciass"],
+  },
+  {
+    title: "cinturon incluido",
+    options: ["cinturon incluido", "cinturon incluidos"],
+  },
+  {
+    title: "vestidito o vestido",
+    options: ["vestidito o vestido", "vestidito o vestidos"],
+  },
+  {
+    title: "vestido musculosa",
+    options: ["vestido musculosa", "vestido musculosas"],
+  },
+  { title: "breteles", options: ["breteles", "breteless"] },
+  { title: "frase", options: ["frase", "frases"] },
+  { title: "inscripción", options: ["inscripción", "inscripcións"] },
 ];
 
 const fullTags = tags.map((tag) => {

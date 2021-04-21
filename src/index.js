@@ -25,6 +25,7 @@ const shop_mercionline = require("./shops/mercionline");
 const shop_tiendaroland = require("./shops/tiendaroland");
 const shop_queenjuana = require("./shops/queenjuana");
 const shop_adrianacostantini = require("./shops/adrianacostantini");
+const shop_salitrada = require("./shops/salitrada");
 
 (async () => {
   let result = "result";
@@ -41,15 +42,14 @@ const shop_adrianacostantini = require("./shops/adrianacostantini");
 
     page.setDefaultNavigationTimeout(0);
 
-    const dateScraping = 1615399414960;
+    const dateScraping = 1618992651742;
 
     // scrapings nuevos
-    await shop_adrianacostantini(page, dateScraping);
+    await shop_salitrada(page, dateScraping);
+
     await shop_queenjuana(page, dateScraping);
+    await shop_adrianacostantini(page, dateScraping);
     await shop_littleparadise(page, dateScraping);
-
-    return;
-
     await shop_tiendaroland(page, dateScraping);
     await shop_mercionline(page, dateScraping);
 
@@ -64,7 +64,7 @@ const shop_adrianacostantini = require("./shops/adrianacostantini");
     await shop_keybiscayne(page, dateScraping);
     await shop_baronhirsch(page, dateScraping);
     await shop_namer(page, dateScraping);
-    await shop_desiderata(page, dateScraping);
+    // await shop_desiderata(page, dateScraping);
     await shop_domaleather(page, dateScraping);
     await shop_harveywillys(page, dateScraping);
 
@@ -72,7 +72,7 @@ const shop_adrianacostantini = require("./shops/adrianacostantini");
     await shop_muaa(page, dateScraping);
     await shop_madnessclothing(page, dateScraping);
     await shop_pielonline(page, dateScraping);
-    await shop_47street(page, dateScraping);
+    // await shop_47street(page, dateScraping);
     await shop_sweet(page, dateScraping);
     await shop_garzongarcia(page, dateScraping);
     await shop_tresasesbasicos(page, dateScraping);

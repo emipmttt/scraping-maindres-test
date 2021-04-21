@@ -1,4 +1,3 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 const autoScroll = require("../utils/autoScroll");
@@ -135,7 +134,7 @@ module.exports = async (page, dateScraping) => {
               return data;
             });
 
-            const product = buildProduct(webData, ["hombre"]);
+            const product = buildProduct(webData, ["hombre", "garzongarcia"]);
             await addProduct(product, dateScraping);
             productAdded++;
           }

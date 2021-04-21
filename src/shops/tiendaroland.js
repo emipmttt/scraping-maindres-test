@@ -139,7 +139,7 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData, []);
+                const product = buildProduct(webData, ["tiendaroland"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log("____");

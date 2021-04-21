@@ -11,8 +11,8 @@ module.exports = async (product, dateScraping) => {
     newProduct.lastUpdate = dateScraping;
     newProduct.image = product.image;
     await mongo.update("products", productId, newProduct);
-    console.log(product.name + " - " + product.price + ` (actualizado) `);
-    console.log(product.tags.join());
+    console.log(newProduct.name + " - " + newProduct.price + ` (actualizado) `);
+    console.log(newProduct.tags.join());
   } else {
     product.lastUpdate = dateScraping;
     await mongo.create("products", product);

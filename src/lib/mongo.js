@@ -82,6 +82,14 @@ const mongo = {
     return result.result;
   },
 
+  async updateMany(collection, filter, data) {
+    const db = await mongo.connect();
+
+    const result = db.collection(collection).updateMany(filter, data);
+
+    return result.result;
+  },
+
   async remove(collection, query) {
     const db = await mongo.connect();
 

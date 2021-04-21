@@ -6,25 +6,10 @@ module.exports = async (page, dateScraping) => {
   try {
     {
       try {
-        await page.goto("https://www.mariarivolta.com/");
+        console.log("___salitrada___");
       } catch (error) {}
 
-      const routes = await page.evaluate(async () => {
-        // routes es el array que guarda los enlaces
-        // de las categorías
-        let nav = Array.from(
-          document.querySelectorAll(
-            "#menu-menu-principal .menu-item .woodmart-nav-link"
-          )
-        );
-        nav = nav.map((category) => {
-          return category.href;
-        });
-
-        nav = [...new Set(nav)];
-
-        return nav;
-      });
+      const routes = ["https://www.salitrada.com/shop/"];
 
       console.log(routes);
 
@@ -36,29 +21,10 @@ module.exports = async (page, dateScraping) => {
 
           await autoScroll(page);
 
-          const clickOnShowMore = async () => {
-            await page.waitForTimeout(1000);
-
-            try {
-              await page.waitForSelector(".next", {
-                timeout: 3000,
-              });
-
-              await page.click(".next");
-
-              await clickOnShowMore();
-            } catch (error) {
-              console.log("No se pudo Mostrar Productos");
-              console.log(error);
-            }
-          };
-
-          await clickOnShowMore();
-
           const products = await page.evaluate(() => {
             return new Promise((resolve) => {
               let products = Array.from(
-                document.querySelectorAll(".product-title a")
+                document.querySelectorAll(".product-element-top>a")
               );
 
               products = products.map((el) => {
@@ -71,6 +37,8 @@ module.exports = async (page, dateScraping) => {
             });
           });
 
+          console.log("Productos encontrados: " + products.length);
+
           for (productUrl of products) {
             try {
               await page.goto(productUrl);
@@ -81,7 +49,7 @@ module.exports = async (page, dateScraping) => {
             var isTrueProduct = false;
 
             try {
-              await page.waitForSelector(".product_title", {
+              await page.waitForSelector(".wp-post-image", {
                 timeout: 3000,
               });
               isTrueProduct = true;
@@ -94,53 +62,51 @@ module.exports = async (page, dateScraping) => {
                 const webData = await page.evaluate(() => {
                   var data = {};
 
-                  data.image = document.querySelector(".zoomImg").src;
+                  data.image = document.querySelector(".wp-post-image").src;
 
-                  data.name = document.querySelector(
-                    ".product_title"
-                  ).innerText;
-
-                  if (document.querySelector("p.price ins")) {
+                  data.name = document.querySelector("h1").innerText;
+                  if (
+                    document.querySelector(".woocommerce-Price-currencySymbol")
+                  ) {
                     data.price = document.querySelector(
-                      "p.price ins"
+                      ".woocommerce-Price-currencySymbol"
                     ).innerText;
-                  } else {
-                    data.price = document.querySelector("p.price").innerText;
-                  }
-
-                  if (document.querySelector("p.price del")) {
                     data.oldPrice = document.querySelector(
-                      "p.price del"
+                      ".woocommerce-Price-currencySymbol"
                     ).innerText;
-                  } else {
-                    data.oldPrice = document.querySelector("p.price").innerText;
                   }
 
                   data.originalId = document.location.href;
                   data.url = document.location.href;
 
-                  data.description =
-                    data.name +
-                    " " +
+                  if (
                     document.querySelector(
                       ".woocommerce-product-details__short-description"
-                    ).innerText;
+                    )
+                  ) {
+                    data.description =
+                      data.name +
+                      " " +
+                      document.querySelector(
+                        ".woocommerce-product-details__short-description"
+                      ).innerText;
+                  } else {
+                    data.description = data.name;
+                  }
 
                   data.brand = {
-                    title: "mariarivolta",
-                    url: "https://www.mariarivolta.com/",
+                    title: "salitrada",
+                    url: "https://www.salitrada.com/",
                   };
-                  console.log(data);
                   return data;
                 });
 
-                const product = buildProduct(webData, [
-                  "mujer",
-                  "mariarivolta",
-                ]);
+                const product = buildProduct(webData, ["salitrada","mujer"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
+                console.log("____");
                 console.log(error);
+                console.log("____");
               }
             }
           }

@@ -128,9 +128,13 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData, ["mujer", "calzado"], {
-                  deleteDots: ".",
-                });
+                const product = buildProduct(
+                  webData,
+                  ["mujer", "calzado", "donne"],
+                  {
+                    deleteDots: ".",
+                  }
+                );
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

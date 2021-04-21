@@ -126,7 +126,13 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData);
+                const product = buildProduct(
+                  webData,
+                  ["adrianacostantini", "mujer"],
+                  {
+                    excludeTags: ["hombre"],
+                  }
+                );
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

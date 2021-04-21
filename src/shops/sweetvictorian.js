@@ -133,9 +133,13 @@ module.exports = async (page, dateScraping) => {
                 return data;
               });
 
-              const product = buildProduct(webData, ["mujer"], {
-                excludeTags: ["hombre"],
-              });
+              const product = buildProduct(
+                webData,
+                ["mujer", "sweetvictorian"],
+                {
+                  excludeTags: ["hombre"],
+                }
+              );
               await addProduct(product, dateScraping);
               productAdded++;
             } catch (error) {

@@ -1,4 +1,3 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 
@@ -131,7 +130,7 @@ module.exports = async (page, dateScraping) => {
 
           console.log(webData);
 
-          const product = buildProduct(webData, ["bebé", "kids"]);
+          const product = buildProduct(webData, ["bebé", "kids", "namer"]);
           await addProduct(product, dateScraping);
         }
       }

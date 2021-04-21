@@ -134,7 +134,7 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData, ["mujer"], {
+                const product = buildProduct(webData, ["mujer", "tuck"], {
                   deleteDots: ",",
                 });
                 await addProduct(product, dateScraping);

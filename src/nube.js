@@ -1,22 +1,5 @@
 const puppeteer = require("puppeteer");
 const shop_tiendanube = require("./shops/tiendanube");
-const shop_tuck = require("./shops/tuck.js");
-const shop_desiderata = require("./shops/desiderata");
-const shop_keybiscayne = require("./shops/keybiscayne");
-const shop_garzongarcia = require("./shops/garzongarcia");
-const shop_tresasesbasicos = require("./shops/tresasesbasicos");
-const shop_namer = require("./shops/namer.js");
-const shop_baronhirsch = require("./shops/baronhirsch.js");
-const shop_oklan = require("./shops/oklan.js");
-const shop_harveywillys = require("./shops/harveywillys.js");
-const shop_equus = require("./shops/equus.js");
-const shop_muaa = require("./shops/muaa.js");
-const shop_pielonline = require("./shops/pielonline.js");
-const shop_sweet = require("./shops/sweet.js");
-const shop_47street = require("./shops/47street");
-const shop_sweetvictorian = require("./shops/sweetvictorian");
-const shop_lazarocuero = require("./shops/lazarocuero");
-const shop_domaleather = require("./shops/domaleather");
 
 (async (event, context, callback) => {
   let result = "result";
@@ -32,58 +15,38 @@ const shop_domaleather = require("./shops/domaleather");
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(0);
 
-    const dateScraping = 1615399414960;
-    await shop_tiendanube(page, "https://klihor.com/", "klihor", dateScraping);
-
-    await shop_tiendanube(
-      page,
-      "https://www.aguschueizer.com/",
-      "mitiendanube",
-      dateScraping
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://laslobas.mitiendanube.com/",
-      "mitiendanube",
-      dateScraping
-    );
+    const dateScraping = 1618992651742;
 
     await shop_tiendanube(
       page,
       "https://shop.veroforest.com/",
       "veroforest",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
       page,
       "https://www.calipsian.com/",
       "calipsian",
-      dateScraping
+      dateScraping,
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
       page,
       "https://www.cumbrebuenosaires.com.ar/",
       "cumbrebuenosaires",
-      dateScraping
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.almacendepijamas.com/",
-      "almacendepijamas",
       dateScraping,
-      { limit: 500 }
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
       page,
       "https://www.silenelingerie.com.ar/",
       "silenelingerie",
-      dateScraping
-      // { tags: ["mujer"] }
+      dateScraping,
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
@@ -127,7 +90,7 @@ const shop_domaleather = require("./shops/domaleather");
       "https://www.anagray.com/",
       "anagray",
       dateScraping,
-      { tags: ["Mujer"] }
+      { tags: ["mujer"] }
     );
 
     await shop_tiendanube(
@@ -315,6 +278,41 @@ const shop_domaleather = require("./shops/domaleather");
       dateScraping,
       { tags: ["mujer", "mallas"] }
     );
+
+    await shop_tiendanube(
+      page,
+      "https://shop.helena.com.ar/",
+      "helena",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.aguschueizer.com/",
+      "aguschueizer",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.almacendepijamas.com/",
+      "almacendepijamas",
+      dateScraping,
+      { limit: 500 }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://laslobas.mitiendanube.com/",
+      "laslobas",
+      dateScraping
+    );
+
+    await shop_tiendanube(page, "https://klihor.com/", "klihor", dateScraping, {
+      tags: ["mujer"],
+    });
   } catch (error) {
     console.log(error);
   }

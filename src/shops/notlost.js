@@ -127,9 +127,13 @@ module.exports = async (page, dateScraping) => {
                 return data;
               });
 
-              const product = buildProduct(webData, ["unisex", "no gender"], {
-                deleteDots: ",",
-              });
+              const product = buildProduct(
+                webData,
+                ["unisex", "no gender", "notlost"],
+                {
+                  deleteDots: ",",
+                }
+              );
               await addProduct(product, dateScraping);
               productAdded++;
             } catch (error) {

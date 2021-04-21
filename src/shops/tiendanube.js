@@ -51,6 +51,7 @@ module.exports = async (page, URLShop, brandName, dateScraping, options) => {
     };
     try {
       var showScreen = 0;
+      var findedProducts = 0;
 
       const clickOnShowMore = async () => {
         await page.waitForTimeout(1000);
@@ -63,9 +64,16 @@ module.exports = async (page, URLShop, brandName, dateScraping, options) => {
 
           if (options && options.limit) {
             const localProducts = await getProducts();
+            console.log(localProducts.length + " productos al momento");
             if (localProducts.length > options.limit) {
               return;
+            } else {
+              if (findedProducts == localProducts.length) {
+                console.log("No hay más productos");
+                return;
+              }
             }
+            findedProducts = localProducts.length;
           }
 
           await page.hover(".js-load-more-btn");
@@ -179,7 +187,7 @@ module.exports = async (page, URLShop, brandName, dateScraping, options) => {
 
         const product = buildProduct(
           webData,
-          options && options.tags ? options.tags : [],
+          options && options.tags ? [...options.tags, brandName] : [brandName],
           options && options.options ? options.options : {}
         );
         await addProduct(product, dateScraping);

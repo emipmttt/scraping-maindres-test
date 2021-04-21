@@ -26,11 +26,30 @@ module.exports = async (page, dateScraping) => {
           console.log("[CATEGORY] - Abriendo " + category);
 
           await page.goto(category);
+          await page.waitForTimeout(2000);
+          await autoScroll(page, 300, 200);
+          const getProductsURL = async () => {
+            return await page.evaluate(() => {
+              return new Promise((resolve) => {
+                let products = Array.from(
+                  document.querySelectorAll("a.product-link")
+                );
 
-          // await autoScroll(page);
+                products = products.map((el) => {
+                  return el.href;
+                });
+
+                products = [...new Set(products)];
+
+                resolve(products);
+              });
+            });
+          };
+
+          let products = [];
+          let pages = 0;
 
           const clickOnShowMore = async () => {
-            console.log("Intentando mostrar más productos");
             await page.waitForTimeout(1000);
             try {
               await page.waitForSelector(".next", {
@@ -39,9 +58,11 @@ module.exports = async (page, dateScraping) => {
               await page.waitForSelector(".next.pgEmpty", {
                 timeout: 3000,
               });
-
+              const localProducts = await getProductsURL();
               await page.click(".next");
-
+              pages++;
+              if (products.length == localProducts.length) return;
+              else products = [...products, ...localProducts];
               await clickOnShowMore();
             } catch (error) {
               console.log("No se pudo Mostrar Productos");
@@ -51,42 +72,30 @@ module.exports = async (page, dateScraping) => {
 
           await clickOnShowMore();
 
-          const products = await page.evaluate(() => {
-            return new Promise((resolve) => {
-              let products = Array.from(
-                document.querySelectorAll("a.product-link")
-              );
-
-              products = products.map((el) => {
-                return el.href;
-              });
-
-              products = [...new Set(products)];
-
-              resolve(products);
-            });
-          });
+          console.log(
+            "Se encontraron " +
+              pages +
+              " Páginas y " +
+              products.length +
+              " productos en esta categoría"
+          );
 
           for (productUrl of products) {
             try {
               await page.goto(productUrl);
-              console.log("Se abrió url correctamente");
             } catch (error) {
-              console.log("Error al abrir el producto");
+              console.log("Error al abrir el producto " + productUrl);
             }
 
             var isTrueProduct = false;
-
-            console.log("Intentando encontrar imagen");
 
             try {
               await page.waitForSelector(".prodname", {
                 timeout: 3000,
               });
               isTrueProduct = true;
-              console.log("Imagen1 encontrada");
             } catch {
-              console.log("Imagen1 no encontrada");
+              console.log("Imagen1 no encontrada " + productUrl);
               isTrueProduct = false;
             }
             if (isTrueProduct) {
@@ -128,9 +137,7 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                console.log(webData);
-
-                const product = buildProduct(webData);
+                const product = buildProduct(webData, ["queenjuana"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

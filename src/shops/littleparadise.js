@@ -59,7 +59,7 @@ module.exports = async (page, dateScraping) => {
           await clickOnShowMore();
 
           products = products.flat();
-          products = [...new Set(products)]
+          products = [...new Set(products)];
 
           console.log("Se encontraron " + products.length + " productos");
 
@@ -134,7 +134,10 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData, ["bebe"]);
+                const product = buildProduct(webData, [
+                  "bebe",
+                  "littleparadise",
+                ]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

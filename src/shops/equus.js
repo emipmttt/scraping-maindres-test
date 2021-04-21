@@ -1,4 +1,3 @@
-
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 const autoScroll = require("../utils/autoScroll");
@@ -131,7 +130,7 @@ module.exports = async (page, dateScraping) => {
 
                 console.log(webData);
 
-                const product = buildProduct(webData, ["hombre"]);
+                const product = buildProduct(webData, ["hombre", "equus"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

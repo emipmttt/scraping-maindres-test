@@ -122,7 +122,7 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData, ["hombre"]);
+                const product = buildProduct(webData, ["hombre", "airborn"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log(error);

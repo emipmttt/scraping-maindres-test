@@ -9,12 +9,15 @@
     "puppeteer": "^8.0.0"
   },
   "devDependencies": {
+    "jest": "^26.6.3",
     "puppeteer-core": "^8.0.0"
   },
   "scripts": {
     "start": "pm2 start src/index.js -l log.txt",
     "serve": "node src/index.js",
-    "nube": "node src/nube.js"
+    "nube": "node src/nube.js",
+    "create-tags": "node src/createTags",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
