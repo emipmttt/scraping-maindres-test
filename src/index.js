@@ -14,6 +14,8 @@ const shop_pielonline = require("./shops/pielonline.js");
 const shop_sweet = require("./shops/sweet.js");
 const shop_47street = require("./shops/47street");
 const shop_sweetvictorian = require("./shops/sweetvictorian");
+const shop_notlost = require("./shops/notlost");
+const shop_madnessclothing = require("./shops/madnessclothing");
 const shop_lazarocuero = require("./shops/lazarocuero");
 const shop_domaleather = require("./shops/domaleather");
 const shop_aeropostale = require("./shops/aeropostale");
@@ -35,7 +37,7 @@ const shop_salitrada = require("./shops/salitrada");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      // headless: false, // este va descomentado para ver el navegador
+      headless: false, // este va descomentado para ver el navegador
     });
 
     const page = await browser.newPage();
@@ -45,41 +47,41 @@ const shop_salitrada = require("./shops/salitrada");
     const dateScraping = 1618992651742;
 
     // scrapings nuevos
-    await shop_salitrada(page, dateScraping);
 
+    await shop_tresasesbasicos(page, dateScraping);
+    await shop_oklan(page, dateScraping);
+    await shop_equus(page, dateScraping);
+    await shop_sweetvictorian(page, dateScraping);
+    await shop_sweet(page, dateScraping);
+    await shop_mariarivolta(page, dateScraping);
+    await shop_muaa(page, dateScraping);
+
+    return;
+    // past
+
+    await shop_salitrada(page, dateScraping);
     await shop_queenjuana(page, dateScraping);
     await shop_adrianacostantini(page, dateScraping);
     await shop_littleparadise(page, dateScraping);
     await shop_tiendaroland(page, dateScraping);
     await shop_mercionline(page, dateScraping);
-
     await shop_notlost(page, dateScraping);
     await shop_airborn(page, dateScraping);
     await shop_donne(page, dateScraping);
-    await shop_mariarivolta(page, dateScraping);
     await shop_aeropostale(page, dateScraping);
-
     await shop_tuck(page, dateScraping);
     await shop_lazarocuero(page, dateScraping);
     await shop_keybiscayne(page, dateScraping);
     await shop_baronhirsch(page, dateScraping);
     await shop_namer(page, dateScraping);
-    // await shop_desiderata(page, dateScraping);
     await shop_domaleather(page, dateScraping);
     await shop_harveywillys(page, dateScraping);
-
-    // past
-    await shop_muaa(page, dateScraping);
     await shop_madnessclothing(page, dateScraping);
     await shop_pielonline(page, dateScraping);
-    // await shop_47street(page, dateScraping);
-    await shop_sweet(page, dateScraping);
     await shop_garzongarcia(page, dateScraping);
-    await shop_tresasesbasicos(page, dateScraping);
-    await shop_oklan(page, dateScraping);
-    await shop_equus(page, dateScraping);
 
-    // to fix
-    await shop_sweetvictorian(page, dateScraping);
+    // not availables
+    // await shop_desiderata(page, dateScraping);
+    // await shop_47street(page, dateScraping);
   } catch (error) {}
 })();

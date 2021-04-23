@@ -1,7 +1,6 @@
 const buildProduct = require("../utils/buildProduct");
 const addProduct = require("../utils/addProduct");
 const autoScroll = require("../utils/autoScroll");
-const fs = require("fs");
 
 module.exports = async (page, dateScraping) => {
   try {
@@ -152,14 +151,6 @@ module.exports = async (page, dateScraping) => {
         } %] `;
 
         console.log(brandMessage);
-
-        fs.appendFile(
-          `log/scraping_resume_${dateScraping}.txt`,
-          brandMessage + "\n",
-          (err) => {
-            if (err) throw err;
-          }
-        );
       } catch (error) {
         console.log(error);
       }

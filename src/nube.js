@@ -19,6 +19,98 @@ const shop_tiendanube = require("./shops/tiendanube");
 
     await shop_tiendanube(
       page,
+      "https://www.disturbia.com.ar/",
+      "disturbia",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.bacchiba.com/",
+      "bacchiba",
+      dateScraping.toExponential,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.pumbo.com.ar/",
+      "pumbo",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
+
+    await shop_tiendanube(
+      page,
+
+      "https://hosefa.com/",
+      "hosefa",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://shop.veroforest.com/",
+      "veroforest",
+      dateScraping,
+      {
+        tags: ["mujer"],
+      }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.florabikinis.com/",
+      "florabikinis",
+      dateScraping,
+      { tags: ["mujer", "mallas"] }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://shop.helena.com.ar/",
+      "helena",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.aguschueizer.com/",
+      "aguschueizer",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://www.almacendepijamas.com/",
+      "almacendepijamas",
+      dateScraping,
+      { limit: 500 }
+    );
+
+    await shop_tiendanube(
+      page,
+      "https://laslobas.mitiendanube.com/",
+      "laslobas",
+      dateScraping
+    );
+
+    await shop_tiendanube(page, "https://klihor.com/", "klihor", dateScraping, {
+      tags: ["mujer"],
+    });
+
+    await shop_tiendanube(
+      page,
       "https://shop.veroforest.com/",
       "veroforest",
       dateScraping,
@@ -222,97 +314,6 @@ const shop_tiendanube = require("./shops/tiendanube");
         tags: ["mujer", "plus size"],
       }
     );
-    await shop_tiendanube(
-      page,
-      "https://www.disturbia.com.ar/",
-      "disturbia",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.bacchiba.com/",
-      "bacchiba",
-      dateScraping.toExponential,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.pumbo.com.ar/",
-      "pumbo",
-      dateScraping,
-      { tags: ["mujer"] }
-    );
-
-    await shop_tiendanube(
-      page,
-
-      "https://hosefa.com/",
-      "hosefa",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://shop.veroforest.com/",
-      "veroforest",
-      dateScraping,
-      {
-        tags: ["mujer"],
-      }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.florabikinis.com/",
-      "florabikinis",
-      dateScraping,
-      { tags: ["mujer", "mallas"] }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://shop.helena.com.ar/",
-      "helena",
-      dateScraping,
-      { tags: ["mujer"] }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.aguschueizer.com/",
-      "aguschueizer",
-      dateScraping,
-      { tags: ["mujer"] }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://www.almacendepijamas.com/",
-      "almacendepijamas",
-      dateScraping,
-      { limit: 500 }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://laslobas.mitiendanube.com/",
-      "laslobas",
-      dateScraping
-    );
-
-    await shop_tiendanube(page, "https://klihor.com/", "klihor", dateScraping, {
-      tags: ["mujer"],
-    });
   } catch (error) {
     console.log(error);
   }

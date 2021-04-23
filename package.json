@@ -1,9 +1,10 @@
 {
-  "name": "testing",
-  "version": "1.0.0",
+  "name": "maindres-scraping",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.21.1",
     "chrome-aws-lambda": "^8.0.0",
     "mongodb": "^3.6.5",
     "puppeteer": "^8.0.0"
@@ -17,7 +18,10 @@
     "serve": "node src/index.js",
     "nube": "node src/nube.js",
     "create-tags": "node src/createTags",
-    "test": "jest"
+    "test": "jest",
+    "tags-remover": "node src/excludedTagRemover",
+    "upload-backup": "node src/uploadBackup.js",
+    "disable-old-products": "node src/disableOldProducts.js"
   },
   "keywords": [],
   "author": "",

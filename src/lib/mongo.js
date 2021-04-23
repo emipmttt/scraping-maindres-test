@@ -79,7 +79,7 @@ const mongo = {
       }
     );
 
-    return result.result;
+    return result;
   },
 
   async updateMany(collection, filter, data) {

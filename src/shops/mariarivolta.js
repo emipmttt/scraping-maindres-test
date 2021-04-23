@@ -33,13 +33,16 @@ module.exports = async (page, dateScraping) => {
           console.log("[CATEGORY] - Abriendo " + category);
 
           await page.goto(category);
-
-          await autoScroll(page);
+          // await autoScroll(page);
 
           const clickOnShowMore = async () => {
             await page.waitForTimeout(1000);
 
             try {
+              await page.waitForSelector(".product-grid-item.product", {
+                timeout: 3000,
+              });
+
               await page.waitForSelector(".next", {
                 timeout: 3000,
               });

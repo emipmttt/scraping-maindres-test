@@ -46,7 +46,7 @@ module.exports = async (page, dateScraping) => {
 
               await clickOnShowMore();
             } catch (error) {
-              console.log("No se pudo Mostrar Productos");
+              console.log("No se pudo mostrar más productos");
               console.log(error);
             }
           };
@@ -115,10 +115,9 @@ module.exports = async (page, dateScraping) => {
                   data.originalId = document.location.href;
                   data.url = document.location.href;
 
-                  data.description =
-                    data.name +
-                    " " +
-                    document.querySelector("p.text-black").innerText;
+                  data.description = document.querySelector(
+                    "body > section.product-details.pt-10 > div.container.container-sections > div > div.col-lg-5.pl-lg-4.pt-4.mt-2.order-2.order-lg-2"
+                  ).innerText;
 
                   data.brand = {
                     title: "donne",
@@ -137,7 +136,8 @@ module.exports = async (page, dateScraping) => {
                 );
                 await addProduct(product, dateScraping);
               } catch (error) {
-                console.log(error);
+                console.error(error);
+                console.log("Error en " + productUrl);
               }
             }
           }
