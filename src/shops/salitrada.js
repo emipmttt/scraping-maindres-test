@@ -52,6 +52,9 @@ module.exports = async (page, dateScraping) => {
               await page.waitForSelector(".wp-post-image", {
                 timeout: 3000,
               });
+              await page.waitForSelector(".price", {
+                timeout: 3000,
+              });
               isTrueProduct = true;
             } catch {
               console.log("Imagen no encontrada", productUrl);
@@ -65,15 +68,9 @@ module.exports = async (page, dateScraping) => {
                   data.image = document.querySelector(".wp-post-image").src;
 
                   data.name = document.querySelector("h1").innerText;
-                  if (
-                    document.querySelector(".woocommerce-Price-currencySymbol")
-                  ) {
-                    data.price = document.querySelector(
-                      ".woocommerce-Price-currencySymbol"
-                    ).innerText;
-                    data.oldPrice = document.querySelector(
-                      ".woocommerce-Price-currencySymbol"
-                    ).innerText;
+                  if (document.querySelector("p.price")) {
+                    data.price = document.querySelector("p.price").innerText;
+                    data.oldPrice = document.querySelector("p.price").innerText;
                   }
 
                   data.originalId = document.location.href;
@@ -101,7 +98,7 @@ module.exports = async (page, dateScraping) => {
                   return data;
                 });
 
-                const product = buildProduct(webData, ["salitrada","mujer"]);
+                const product = buildProduct(webData, ["salitrada", "mujer"]);
                 await addProduct(product, dateScraping);
               } catch (error) {
                 console.log("____");

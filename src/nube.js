@@ -9,13 +9,21 @@ const shop_tiendanube = require("./shops/tiendanube");
     browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
       ignoreDefaultArgs: ["--disable-extensions"],
-      // headless: false,
+      headless: false,
     });
 
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(0);
 
     const dateScraping = 1618992651742;
+
+    await shop_tiendanube(
+      page,
+      "https://tienda.melinapinedo.com/ar/",
+      "melinapinedo",
+      dateScraping,
+      { tags: ["mujer"] }
+    );
 
     await shop_tiendanube(
       page,
@@ -137,14 +145,6 @@ const shop_tiendanube = require("./shops/tiendanube");
       page,
       "https://www.silenelingerie.com.ar/",
       "silenelingerie",
-      dateScraping,
-      { tags: ["mujer"] }
-    );
-
-    await shop_tiendanube(
-      page,
-      "https://tienda.melinapinedo.com/mx/",
-      "melinapinedo",
       dateScraping,
       { tags: ["mujer"] }
     );

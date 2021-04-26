@@ -29,20 +29,18 @@ module.exports = async (page, dateScraping) => {
           await page.waitForTimeout(2000);
           await autoScroll(page, 300, 200);
           const getProductsURL = async () => {
-            return await page.evaluate(() => {
-              return new Promise((resolve) => {
-                let products = Array.from(
-                  document.querySelectorAll("a.product-link")
-                );
+            return page.evaluate(() => {
+              let products = Array.from(
+                document.querySelectorAll("a.product-link")
+              );
 
-                products = products.map((el) => {
-                  return el.href;
-                });
-
-                products = [...new Set(products)];
-
-                resolve(products);
+              products = products.map((el) => {
+                return el.href;
               });
+
+              products = [...new Set(products)];
+
+              return products;
             });
           };
 
@@ -50,19 +48,25 @@ module.exports = async (page, dateScraping) => {
           let pages = 0;
 
           const clickOnShowMore = async () => {
-            await page.waitForTimeout(1000);
             try {
               await page.waitForSelector(".next", {
-                timeout: 3000,
+                timeout: 4000,
               });
-              await page.waitForSelector(".next.pgEmpty", {
-                timeout: 3000,
-              });
+              // await page.waitForSelector(".next.pgEmpty", {
+              //   timeout: 3000,
+              // });
               const localProducts = await getProductsURL();
-              await page.click(".next");
+              await page.hover("li.next");
+              await page.click("li.next");
               pages++;
-              if (products.length == localProducts.length) return;
-              else products = [...products, ...localProducts];
+
+              await page.waitForTimeout(1000);
+              const newProductList = Array.from(
+                new Set([...products, ...localProducts])
+              );
+
+              if (products.length == newProductList.length) return;
+              else products = newProductList;
               await clickOnShowMore();
             } catch (error) {
               console.log("No se pudo Mostrar Productos");
@@ -95,7 +99,7 @@ module.exports = async (page, dateScraping) => {
               });
               isTrueProduct = true;
             } catch {
-              console.log("Imagen1 no encontrada " + productUrl);
+              console.log("Imagen no encontrada " + productUrl);
               isTrueProduct = false;
             }
             if (isTrueProduct) {
@@ -108,6 +112,10 @@ module.exports = async (page, dateScraping) => {
                   ).href;
                   data.name = document.querySelector(".prodname").innerText;
 
+                  document.querySelector(
+                    "#content > article > div.info > div.price-box > div.cleaned-price"
+                  ).style.visibility = "visible";
+                  console.log(document.querySelector(".bestPrice").innerText);
                   if (document.querySelector(".bestPrice")) {
                     data.price = document.querySelector(".bestPrice").innerText;
                   }
@@ -117,9 +125,7 @@ module.exports = async (page, dateScraping) => {
                       ".listPrice"
                     ).innerText;
                   } else {
-                    data.oldPrice = document.querySelector(
-                      ".bestPrice"
-                    ).innerText;
+                    data.oldPrice = data.price;
                   }
 
                   data.originalId = document.location.href;

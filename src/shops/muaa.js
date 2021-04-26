@@ -40,6 +40,7 @@ module.exports = async (page, dateScraping) => {
                 timeout: 3000,
               });
 
+              await page.hover("#galeria > div > a");
               await page.click("#galeria > div > a");
 
               await clickOnShowMore();
@@ -99,16 +100,17 @@ module.exports = async (page, dateScraping) => {
                   data.name = document.querySelector(
                     "#nombreProducto"
                   ).innerText;
-                  if (document.querySelector(".price")) {
-                    data.price = document.querySelector(".price").innerText;
-                  }
 
-                  if (document.querySelector(".old-price")) {
+                  if (document.querySelector(".special-price")) {
+                    data.price = document.querySelector(
+                      ".special-price"
+                    ).innerText;
                     data.oldPrice = document.querySelector(
                       ".old-price"
                     ).innerText;
                   } else {
-                    data.oldPrice = document.querySelector(".price").innerText;
+                    data.price = document.querySelector(".price").innerText;
+                    data.oldPrice = data.price;
                   }
 
                   data.originalId = document.location.href;
@@ -137,5 +139,7 @@ module.exports = async (page, dateScraping) => {
         }
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };

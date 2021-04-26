@@ -13,6 +13,11 @@ module.exports = async (page, URLShop, brandName, dateScraping, options) => {
 
     await page.goto(URLShop + "productos/?mpage=1000");
 
+    await page.evaluate(() => {
+      localStorage.setItem("site_lang", "AR");
+    });
+    await page.goto(URLShop + "productos/?mpage=1000");
+
     await removeSelector(page, "#fb-root");
     await removeSelector(page, ".p-layer");
     const getProducts = async () => {

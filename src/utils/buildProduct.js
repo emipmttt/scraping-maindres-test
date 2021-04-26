@@ -15,6 +15,14 @@ const buildProduct = (product, pre_tags, options) => {
 
   productBuilded.name = product.name.toUpperCase();
 
+  if (
+    !productBuilded.price ||
+    productBuilded.price == "NaN" ||
+    productBuilded.price == NaN ||
+    isNaN(productBuilded.price)
+  )
+    console.log("No se encontró precio en este producto - " + product.url);
+
   if (options && options.deleteDots == ".") {
     productBuilded.price = product.price.replace(/\$/g, "").replace(/\./g, "");
     productBuilded.price = productBuilded.price.replace(/ARS/g, "");
@@ -70,6 +78,8 @@ const buildProduct = (product, pre_tags, options) => {
       }
     }
   }
+
+  productBuilded.active = true;
 
   return productBuilded;
 };
